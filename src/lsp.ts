@@ -16,8 +16,8 @@ export interface LspClient {
   sendNotification(method: string, args: any): Promise<void>;
 }
 
-function buildUri(path: string, ...args: string[]) {
-  return `${URI_SCHEME}://` + path.concat(...args);
+function buildUri(...paths: string[]) {
+  return `${URI_SCHEME}://` + path.resolve(...paths);
 }
 
 export async function startLsp(
@@ -88,13 +88,14 @@ export async function initialize(lsp: LspClient) {
   try {
     const file = path.resolve(__dirname, "lsp.ts");
     const contents = await fs.readFile(file, "utf8");
+    const uri = buildUri(file);
 
     // Before requesting symbols, you need to notify the server about the document
     const notification = await lsp.sendNotification(
       protocol.DidOpenTextDocumentNotification.method,
       {
         textDocument: {
-          uri: "file://" + file,
+          uri: uri,
           languageId: "typescript",
           version: 1,
           text: contents,
@@ -107,7 +108,7 @@ export async function initialize(lsp: LspClient) {
       protocol.DocumentSymbolRequest.method,
       {
         textDocument: {
-          uri: "file://" + file,
+          uri: uri,
         },
       },
     );
