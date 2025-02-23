@@ -1,16 +1,24 @@
 import { Logger } from "vscode-jsonrpc";
 
-export const consoleLogger: Logger = {
-    error: (message: string) => {
-        console.error(message);
-    },
-    warn: (message: string) => {
-        console.warn(message);
-    },
-    info: (message: string) => {
-        console.info(message);
-    },
-    log: (message: string) => {
-        console.log(message);
-    }
+function formatMessage(message: string) {
+  if (!message.endsWith("\n")) {
+    message += "\n";
+  }
+
+  return message;
 }
+
+export const consoleLogger: Logger = {
+  error: (message: string) => {
+    console.error(formatMessage(message));
+  },
+  warn: (message: string) => {
+    console.warn(formatMessage(message));
+  },
+  info: (message: string) => {
+    console.info(formatMessage(message));
+  },
+  log: (message: string) => {
+    console.log(formatMessage(message));
+  },
+};
