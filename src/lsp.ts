@@ -2,17 +2,29 @@ import { ChildProcess, spawn } from "child_process";
 import * as fs from "fs/promises";
 import * as rpc from "vscode-jsonrpc";
 import { StreamMessageReader, StreamMessageWriter } from "vscode-jsonrpc/node";
-import { InitializeRequest } from "vscode-languageserver-protocol";
+import { InitializeRequest, InitializeResult } from "vscode-languageserver-protocol";
 import * as protocol from "vscode-languageserver-protocol";
 import { consoleLogger } from "./logger";
 import path from "path";
 
+const URI_SCHEME = "lsp";
 const logger = consoleLogger;
 
 export interface LspClient {
   dispose: () => void;
   sendRequest(method: string, args: any): Promise<any>;
   sendNotification(method: string, args: any): Promise<void>;
+}
+
+function buildUri(path: string, ...args: string[]) {
+  return `${URI_SCHEME}://` + path.concat(...args);
+}
+
+export async function startLsp(
+  command: string,
+  args: string[],
+): Promise<LspClient> {
+  return LspClientImpl.create(command, args);
 }
 
 class LspClientImpl implements LspClient {
@@ -43,12 +55,19 @@ class LspClientImpl implements LspClient {
 
     connection.listen();
 
-    return new LspClientImpl(childProcess, connection);
+    const response = await connection.sendRequest(InitializeRequest.type, {
+      processId: process.pid,
+      rootUri: buildUri('/'),
+      capabilities: {},
+    });
+
+    return new LspClientImpl(childProcess, connection, response.capabilities);
   }
 
   private constructor(
     private readonly childProcess: ChildProcess,
     private readonly connection: rpc.MessageConnection,
+    private readonly capabilities: protocol.ServerCapabilities, // TODO: not sure what I'm doing with this, but it'll be needed I feel like
   ) {}
 
   sendRequest(method: string, args: any): Promise<any> {
@@ -65,22 +84,8 @@ class LspClientImpl implements LspClient {
   }
 }
 
-export async function startLsp(
-  command: string,
-  args: string[],
-): Promise<LspClient> {
-  return LspClientImpl.create(command, args);
-}
-
 export async function initialize(lsp: LspClient) {
   try {
-    const response = await lsp.sendRequest(InitializeRequest.method, {
-      processId: process.pid,
-      rootUri: "file://" + path.resolve(__dirname),
-      capabilities: {},
-    });
-
-    logger.info(`Server initialized: ${JSON.stringify(response)}`);
     const file = path.resolve(__dirname, "lsp.ts");
     const contents = await fs.readFile(file, "utf8");
 
