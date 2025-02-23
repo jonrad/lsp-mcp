@@ -23,5 +23,8 @@
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "test": "jest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.5.0"
   }
 }
