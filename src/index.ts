@@ -7,7 +7,7 @@ async function main() {
   
   await initialize(lsp);
   console.log("Initialized");
-  lsp.stop();
+  lsp.dispose();
 }
 
 main();
