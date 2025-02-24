@@ -8,12 +8,13 @@ import { getTools } from "./lsp-tools";
 import { nullLogger } from "./logger";
 
 async function main() {
+  const tools = await getTools();
+
   const lsp = await startLsp("sh", [
     "-c",
     "yarn --silent typescript-language-server --stdio --log-level 4 | tee lsp.log",
   ], nullLogger);
 
-  const tools = getTools();
   const toolLookup = new Map(tools.map((tool) => [tool.name, tool]));
 
   const mcp = createMcp();
