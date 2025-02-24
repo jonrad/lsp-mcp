@@ -12,8 +12,8 @@ const URI_SCHEME = "file";
 function buildUri(...paths: string[]) {
   return `${URI_SCHEME}://` + path.resolve(...paths);
 }
-
-async function withFile<T>(lsp: LspClient, file: string, fn: (lsp: LspClient, uri: string) => Promise<T>): Promise<T> {
+  
+async function openFile(lsp: LspClient, file: string): Promise<string> {
   const uri = buildUri(file)
   const contents = await fs.readFile(file, "utf8");
 
@@ -25,6 +25,12 @@ async function withFile<T>(lsp: LspClient, file: string, fn: (lsp: LspClient, ur
       text: contents,
     },
   });
+  
+  return uri
+}
+
+async function withFile<T>(lsp: LspClient, file: string, fn: (lsp: LspClient, uri: string) => Promise<T>): Promise<T> {
+  const uri = await openFile(lsp, file)
 
   const result = await fn(lsp, uri);
  
@@ -105,20 +111,15 @@ const definitionRequest: Tool = {
   name: protocol.DefinitionRequest.method.replace("/", "_"),
   description: "Get the definition of a symbol",
   inputSchema: TextDocumentPositionParams,
-  handler: async (lsp: LspClient, args: Record<string, unknown>) => {
-    const file = (args as any)['textDocument']['uri'] as string
-    const line = (args as any)['position']['line'] as number
-    const character = (args as any)['position']['character'] as number
-    if (!file) {
-      throw new Error("No file")
+  handler: async (lsp: LspClient, args: Record<string, any>) => {
+    const lspArgs = { ...args }
+    if (lspArgs.textDocument?.uri) {
+      const file = lspArgs.textDocument.uri
+      const uri = await openFile(lsp, file)
+      lspArgs.textDocument = { ...lspArgs.textDocument, uri }
     }
-
-    return withFile(lsp, file, (lsp, uri) =>
-      lsp.sendRequest(protocol.DefinitionRequest.method, {
-        textDocument: { uri: uri },
-        position: { line: line, character: character },
-      }),
-    );
+    
+    return await lsp.sendRequest(protocol.DefinitionRequest.method, lspArgs);
   },
 };
 
