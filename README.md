@@ -26,3 +26,6 @@ npx @wong2/mcp-cli --config mcp_config.json
 * ~~[uv](https://docs.astral.sh/uv/)  for package management and such - I've been seeing this used more frequently lately and this is an excuse to learn it. Switching package managers in the future is annoying but doable. I may have to revisit this decision once implementing CI/CD. Maybe I can use this instead of a dependency on [taskfile](https://taskfile.dev/) as well? TBD~~
 * Async when possible - It's 2025
 * Switching to node after all. POC with python was more successful than I expected. But, multilspy doesn't support the entire LSP spec and vscode's library will be easier to work with as node is arguably the defacto standard language of LSP servers/clients. 
+
+## References
+* [Generated LSP JSON Schema](https://gist.github.com/bollwyvl/7a128978b8ae89ab02bbd5b84d07a4b7#file-generated-protocol-schema-json)
