@@ -11,6 +11,7 @@ const URI_SCHEME = "lsp";
 const logger = consoleLogger;
 
 export interface LspClient {
+  readonly connection: rpc.MessageConnection;
   dispose: () => void;
   sendRequest(method: string, args: any): Promise<any>;
   sendNotification(method: string, args: any): Promise<void>;
@@ -66,7 +67,7 @@ class LspClientImpl implements LspClient {
 
   private constructor(
     private readonly childProcess: ChildProcess,
-    private readonly connection: rpc.MessageConnection,
+    readonly connection: rpc.MessageConnection, // TODO: make this private
     private readonly capabilities: protocol.ServerCapabilities, // TODO: not sure what I'm doing with this, but it'll be needed I feel like
   ) {}
 
