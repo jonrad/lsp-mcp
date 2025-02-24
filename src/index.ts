@@ -1,17 +1,21 @@
 import { startLsp } from "./lsp";
 import { startMcp, createMcp } from "./mcp";
-import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import {
+  CallToolRequestSchema,
+  ListToolsRequestSchema,
+} from "@modelcontextprotocol/sdk/types.js";
 import { getTools } from "./lsp-tools";
+import { nullLogger } from "./logger";
 
 async function main() {
   const lsp = await startLsp("sh", [
     "-c",
     "yarn --silent typescript-language-server --stdio --log-level 4 | tee lsp.log",
-  ]);
- 
-  const tools = getTools()
-  const toolLookup = new Map(tools.map((tool) => [tool.name, tool]))
- 
+  ], nullLogger);
+
+  const tools = getTools();
+  const toolLookup = new Map(tools.map((tool) => [tool.name, tool]));
+
   const mcp = createMcp();
   mcp.setRequestHandler(ListToolsRequestSchema, async () => {
     const mcpTools = tools.map((tool) => ({
@@ -24,7 +28,7 @@ async function main() {
       tools: mcpTools,
     };
   });
- 
+
   mcp.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { name, arguments: args } = request.params
     if (!args) {
@@ -42,7 +46,7 @@ async function main() {
       content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
     };
   });
- 
+
   await startMcp(mcp);
 }
 

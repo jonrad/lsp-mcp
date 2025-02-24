@@ -1,14 +1,13 @@
 import { ChildProcess, spawn } from "child_process";
-import * as fs from "fs/promises";
 import * as rpc from "vscode-jsonrpc";
 import { StreamMessageReader, StreamMessageWriter } from "vscode-jsonrpc/node";
-import { InitializeRequest, InitializeResult } from "vscode-languageserver-protocol";
+import { InitializeRequest } from "vscode-languageserver-protocol";
 import * as protocol from "vscode-languageserver-protocol";
 import { consoleLogger } from "./logger";
+import { Logger } from "vscode-jsonrpc";
 import path from "path";
 
 const URI_SCHEME = "lsp";
-const logger = consoleLogger;
 
 export interface LspClient {
   readonly connection: rpc.MessageConnection;
@@ -24,20 +23,22 @@ function buildUri(...paths: string[]) {
 export async function startLsp(
   command: string,
   args: string[],
+  logger: Logger = consoleLogger,
 ): Promise<LspClient> {
-  return LspClientImpl.create(command, args);
+  return LspClientImpl.create(command, args, logger);
 }
 
 class LspClientImpl implements LspClient {
   public static async create(
     command: string,
     args: string[],
+    logger: Logger,
   ): Promise<LspClient> {
     const childProcess = spawn(command, args);
     const connection = rpc.createMessageConnection(
       new StreamMessageReader(childProcess.stdout),
       new StreamMessageWriter(childProcess.stdin),
-      consoleLogger,
+      logger,
     );
 
     connection.onError((error) => {
@@ -82,39 +83,5 @@ class LspClientImpl implements LspClient {
   dispose() {
     this.connection.dispose();
     this.childProcess.kill();
-  }
-}
-
-export async function initialize(lsp: LspClient) {
-  try {
-    const file = path.resolve(__dirname, "lsp.ts");
-    const contents = await fs.readFile(file, "utf8");
-    const uri = buildUri(file);
-
-    // Before requesting symbols, you need to notify the server about the document
-    const notification = await lsp.sendNotification(
-      protocol.DidOpenTextDocumentNotification.method,
-      {
-        textDocument: {
-          uri: uri,
-          languageId: "typescript",
-          version: 1,
-          text: contents,
-        },
-      },
-    );
-    logger.info(`Notification: ${JSON.stringify(notification)}`);
-
-    const symbols = await lsp.sendRequest(
-      protocol.DocumentSymbolRequest.method,
-      {
-        textDocument: {
-          uri: uri,
-        },
-      },
-    );
-    logger.info(`Symbols: ${JSON.stringify(symbols)}`);
-  } catch (error) {
-    logger.error(`Error initializing server: ${error}`);
   }
 }

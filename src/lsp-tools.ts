@@ -36,7 +36,7 @@ async function withFile<T>(lsp: LspClient, file: string, fn: (lsp: LspClient, ur
 }
 
 const documentSymbolRequest: Tool = {
-  name: protocol.DocumentSymbolRequest.method,
+  name: protocol.DocumentSymbolRequest.method.replace("/", "_"),
   description: "Get the symbols in a file",
   inputSchema: {
     type: "object",
@@ -58,21 +58,57 @@ const documentSymbolRequest: Tool = {
   },
 };
 
-const definitionRequest: Tool = {
-  name: protocol.DefinitionRequest.method,
-  description: "Get the definition of a symbol",
-  inputSchema: {
-    type: "object",
-    properties: {
-      file: { type: "string" },
-      line: { type: "number" },
-      character: { type: "number" },
+const TextDocumentPositionParams = {
+  additionalProperties: false,
+  description:
+    "A parameter literal used in requests to pass a text document and a position inside that document.",
+  properties: {
+    position: {
+      additionalProperties: false,
+      description:
+        "Position in a text document expressed as zero-based line and character offset.\nThe offsets are based on a UTF-16 string representation. So a string of the form\n`a𐐀b` the character offset of the character `a` is 0, the character offset of `𐐀`\nis 1 and the character offset of `b` is 3 since `𐐀` is represented using two code\nunits in UTF-16.\n\nPositions are line end character agnostic. So you cannot specify a position that\ndenotes `\\r|\\n` or `\\n|` where `|` represents the character offset.",
+      properties: {
+        character: {
+          description:
+            "Character offset on a line in a document (zero-based). Assuming that the line is\nrepresented as a string, the `character` value represents the gap between the\n`character` and `character + 1`.\n\nIf the character value is greater than the line length it defaults back to the\nline length.\nIf a line number is negative, it defaults to 0.",
+          type: "number",
+        },
+        line: {
+          description:
+            "Line position in a document (zero-based).\nIf a line number is greater than the number of lines in a document, it defaults back to the number of lines in the document.\nIf a line number is negative, it defaults to 0.",
+          type: "number",
+        },
+      },
+      required: ["line", "character"],
+      type: "object",
+    },
+    textDocument: {
+      additionalProperties: false,
+      description:
+        "A literal to identify a text document in the client. \nThe TextDocumentIdentifier namespace provides helper functions to work with\nTextDocumentIdentifier literals.",
+      properties: {
+        uri: {
+          description: "A tagging type for string properties that are actually URIs.",
+          type: "string",
+        },
+      },
+      required: ["uri"],
+      type: "object",
     },
   },
+  required: ["textDocument", "position"],
+  type: "object" as "object",
+};
+
+
+const definitionRequest: Tool = {
+  name: protocol.DefinitionRequest.method.replace("/", "_"),
+  description: "Get the definition of a symbol",
+  inputSchema: TextDocumentPositionParams,
   handler: async (lsp: LspClient, args: Record<string, unknown>) => {
-    const file = args['file'] as string
-    const line = args['line'] as number
-    const character = args['character'] as number
+    const file = (args as any)['textDocument']['uri'] as string
+    const line = (args as any)['position']['line'] as number
+    const character = (args as any)['position']['character'] as number
     if (!file) {
       throw new Error("No file")
     }
