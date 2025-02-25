@@ -10,6 +10,7 @@ import { getLspMethods, lspMethodHandler, openFileContents } from "./lsp-methods
 import { nullLogger, consoleLogger } from "./logger";
 import { Command } from "commander";
 import { ToolManager } from "./tool-manager";
+import { loadConfig } from "./config";
 
 async function main(methods: string[] | undefined = undefined, lspCommand: string, verbose: boolean) {
   const logger = verbose ? consoleLogger : nullLogger;
@@ -110,5 +111,6 @@ program
   .parse(process.argv);
 
 const options = program.opts();
+
 
 main(options.methods, options.lsp, options.verbose);

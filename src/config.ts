@@ -14,6 +14,9 @@ const ConfigSchema = z.object({
 export type Config = z.infer<typeof ConfigSchema>;
 
 export async function loadConfig(path: string): Promise<Config> {
-  const config = await fs.readFile(path, "utf8");
-  return ConfigSchema.parse(JSON.parse(config));
+  const stripJsonComments = await import("strip-json-comments");
+  const contents = await fs.readFile(path, "utf8");
+  const config = stripJsonComments.default(contents);
+
+  return await ConfigSchema.parseAsync(JSON.parse(config));
 }

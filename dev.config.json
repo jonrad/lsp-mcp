@@ -1,0 +1,12 @@
+/* Comments are allowed in this config file, yay */
+{
+  "lsps": [
+    {
+      "id": "typescript", // unique id for logging purposes only
+      "extensions": ["ts", "tsx", "js", "jsx"], // helps identify which files to use this lsp for
+      "languages": ["typescript", "javascript"], // if the LLM sends one of these key words as the language, use this lsp
+      "command": "npx",
+      "args": ["-y", "typescript-language-server", "--stdio"]
+    }
+  ]
+}
