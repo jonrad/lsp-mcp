@@ -111,6 +111,7 @@ yarn dev --help # Get the CLI help
 * Async when possible - It's 2025
 * Switching to node after all. POC with python was more successful than I expected. But, multilspy doesn't support the entire LSP spec and vscode's library will be easier to work with as node is arguably the defacto standard language of LSP servers/clients.
 * Using the low-level MCP SDK. I think I'll need more control and it's frankly not that complicated as compared to the higher level FastMCP.
+* Using [zod](https://zod.dev/) for config validation. It's already a dependency for the MCP SDK, so no reason to overthink it.
 
 ### Roadmap
 This is just a list of things I'd like to do eventually. There is no timeline or order for these.
