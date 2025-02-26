@@ -11,6 +11,7 @@ import path from "path";
 const URI_SCHEME = "lsp";
 
 export interface LspClient {
+  start(): Promise<void>;
   dispose: () => void;
   sendRequest(method: string, args: any): Promise<any>;
   sendNotification(method: string, args: any): Promise<void>;
@@ -25,34 +26,46 @@ export async function startLsp(
   args: string[],
   logger: Logger = consoleLogger,
 ): Promise<LspClient> {
-  return LspClientImpl.create(command, args, logger);
+  const lsp = new LspClientImpl(command, args, logger);
+  await lsp.start();
+  return lsp;
 }
 
-class LspClientImpl implements LspClient {
-  public static async create(
-    command: string,
-    args: string[],
-    logger: Logger,
-  ): Promise<LspClient> {
-    const childProcess = spawn(command, args);
-    const connection = rpc.createMessageConnection(
+export class LspClientImpl implements LspClient {
+  protected childProcess: ChildProcess | undefined;
+  protected connection: rpc.MessageConnection | undefined;
+  protected capabilities: protocol.ServerCapabilities | undefined;
+  public constructor(
+    private readonly command: string,
+    private readonly args: string[],
+    private readonly logger: Logger, // TODO: better long term solution for logging
+  ) {}
+
+  public async start() {
+    const childProcess = this.childProcess = spawn(this.command, this.args);
+
+    if (!childProcess.stdout || !childProcess.stdin) {
+      throw new Error("Child process not started");
+    }
+
+    const connection = this.connection = rpc.createMessageConnection(
       new StreamMessageReader(childProcess.stdout),
       new StreamMessageWriter(childProcess.stdin),
-      logger,
+      this.logger,
     );
 
     connection.onError((error) => {
-      logger.error(`Connection error: ${error}`);
+      this.logger.error(`Connection error: ${error}`);
       childProcess.kill();
     });
 
     connection.onClose(() => {
-      logger.log("Connection closed");
+      this.logger.log("Connection closed");
       childProcess.kill();
     });
 
     connection.onUnhandledNotification((notification) => {
-      logger.log(`Unhandled notification: ${JSON.stringify(notification)}`);
+      this.logger.log(`Unhandled notification: ${JSON.stringify(notification)}`);
     });
 
     connection.listen();
@@ -66,35 +79,29 @@ class LspClientImpl implements LspClient {
       capabilities: capabilities,
     });
 
-    logger.info(`Server LSP capabilities: ${JSON.stringify(response.capabilities, null, 2)}`);
-
-    return new LspClientImpl(
-      childProcess,
-      connection,
-      response.capabilities,
-      logger,
-    );
+    this.logger.info(`Server LSP capabilities: ${JSON.stringify(response.capabilities, null, 2)}`);
   }
 
-  private constructor(
-    private readonly childProcess: ChildProcess,
-    private readonly connection: rpc.MessageConnection,
-    private readonly capabilities: protocol.ServerCapabilities, // TODO: not sure what I'm doing with this, but it'll be needed I feel like
-    private readonly logger: Logger, // TODO: better long term solution for logging
-  ) {}
+  private assertStarted(): asserts this is LspClientImpl & { connection: rpc.MessageConnection } {
+    if (!this.connection) {
+      throw new Error("Not started");
+    }
+  }
 
   sendRequest(method: string, args: any): Promise<any> {
+    this.assertStarted();
     return this.connection.sendRequest(method, args);
   }
 
   sendNotification(method: string, args: any): Promise<void> {
+    this.assertStarted();
     return this.connection.sendNotification(method, args);
   }
 
   dispose() {
     try {
-      this.connection.dispose();
-      this.childProcess.kill();
+      this.connection?.dispose();
+      this.childProcess?.kill();
     } catch (e: any) {
       this.logger.error(e.toString?.());
     }

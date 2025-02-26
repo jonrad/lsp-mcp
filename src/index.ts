@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { startLsp } from "./lsp";
+import { LspClientImpl, startLsp } from "./lsp";
 import { startMcp, createMcp } from "./mcp";
 import {
   CallToolRequestSchema,
@@ -11,6 +11,37 @@ import { nullLogger, consoleLogger } from "./logger";
 import { Command } from "commander";
 import { ToolManager } from "./tool-manager";
 import { loadConfig } from "./config";
+import { Logger } from "vscode-jsonrpc";
+import { Config } from "./config";
+
+async function buildLsps(lsps: Config["lsps"], logger: Logger) {
+  /*
+  const lsps = [];
+  for (const lsp of lsps) {
+    const lsp = await startLsp("sh", [
+      "-c",
+      lspCommand
+    ], logger);
+  }
+  */
+}
+
+async function mainConfig(
+  configPath: string,
+  methods: string[] | undefined = undefined,
+  verbose: boolean = false,
+) {
+  const logger = verbose ? consoleLogger : nullLogger;
+  const config = await loadConfig(configPath);
+  const lspMethods = await getLspMethods(methods);
+
+  const lsps = buildLsps(config.lsps, logger);
+  for (const lspConfig of config.lsps) {
+    const toolManager = new ToolManager(logger);
+
+    const lsp = await startLsp(lspConfig.command, lspConfig.args, logger);
+  }
+}
 
 async function main(methods: string[] | undefined = undefined, lspCommand: string, verbose: boolean) {
   const logger = verbose ? consoleLogger : nullLogger;
@@ -18,10 +49,8 @@ async function main(methods: string[] | undefined = undefined, lspCommand: strin
   const toolManager = new ToolManager(logger);
   const lspMethods = await getLspMethods(methods);
 
-  const lsp = await startLsp("sh", [
-    "-c",
-    lspCommand
-  ], logger);
+  const lsp = new LspClientImpl("sh", ["-c", lspCommand], logger);
+  await lsp.start();
 
   toolManager.registerTool({
     id: "file_contents_to_uri",
@@ -108,9 +137,14 @@ program
     `npx -y typescript-language-server --stdio`
   )
   .option("-v, --verbose", "Verbose output (Dev only, don't use with MCP)")
+  .option("-c, --config [string]", "Path to config file")
   .parse(process.argv);
 
 const options = program.opts();
 
+if (options.config) {
+  mainConfig(options.config, options.methods, options.verbose);
+} else {
+  main(options.methods, options.lsp, options.verbose);
+}
 
-main(options.methods, options.lsp, options.verbose);
