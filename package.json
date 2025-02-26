@@ -39,7 +39,8 @@
     "mcp-cli:simple": "npx @wong2/mcp-cli --config dev/mcp_config_simple.json",
     "mcp-cli:prod": "npx @wong2/mcp-cli --config dev/mcp_config_prod.json",
     "mcp-cli:docker": "npx @wong2/mcp-cli --config dev/mcp_config_docker.json",
-    "dev:simple": "yarn dev --methods textDocument/documentSymbol"
+    "dev:simple": "yarn dev --methods textDocument/documentSymbol",
+    "llm": "uvx --python 3.12 --from git+https://github.com/adhikasp/mcp-client-cli.git llm --text-only"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.9.1",
