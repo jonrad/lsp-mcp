@@ -1,6 +1,7 @@
 .dockerignore
 Dockerfile
-./dev
+./dev/*
+!./dev/prod.config.json
 ./.git
 ./.gitignore
 ./poc
