@@ -36,6 +36,10 @@ export class LspClientImpl implements LspClient {
   ) {}
 
   public async start() {
+    if (this.isStarted()) {
+      return;
+    }
+
     const childProcess = this.childProcess = spawn(this.command, this.args);
 
     if (!childProcess.stdout || !childProcess.stdin) {
@@ -76,20 +80,34 @@ export class LspClientImpl implements LspClient {
     this.logger.info(`Server LSP capabilities: ${JSON.stringify(response.capabilities, null, 2)}`);
   }
 
+  private isStarted(): this is LspClientImpl & { connection: rpc.MessageConnection } {
+    return !!this.connection;
+  }
+
   private assertStarted(): asserts this is LspClientImpl & { connection: rpc.MessageConnection } {
     if (!this.connection) {
       throw new Error("Not started");
     }
   }
 
-  sendRequest(method: string, args: any): Promise<any> {
+  async sendRequest(method: string, args: any): Promise<any> {
+    if (!this.isStarted()) {
+      await this.start();
+    }
+
     this.assertStarted();
-    return this.connection.sendRequest(method, args);
+
+    return await this.connection.sendRequest(method, args);
   }
 
-  sendNotification(method: string, args: any): Promise<void> {
+  async sendNotification(method: string, args: any): Promise<void> {
+    if (!this.isStarted()) {
+      await this.start();
+    }
+
     this.assertStarted();
-    return this.connection.sendNotification(method, args);
+
+    return await this.connection.sendNotification(method, args);
   }
 
   dispose() {

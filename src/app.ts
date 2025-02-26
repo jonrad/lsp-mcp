@@ -58,18 +58,38 @@ export class App {
       }
 
       const result = await this.toolManager.callTool(name, args);
+      const serialized = typeof result === "string" ? result : JSON.stringify(result, null, 2);
 
       return {
-        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+        content: [{ type: "text", text: result }],
       };
     });
   }
 
   private async registerTools() {
     this.toolManager.registerTool({
+      id: "lsp_info",
+      description: "Returns information about the the LSP tools available. This is useful for debugging which programming languages are supported.",
+      inputSchema: {
+        type: "object" as "object",
+      },
+      handler: async () => {
+        const result = this.lspManager.getLsps().map((lsp) => {
+          return {
+            id: lsp.id,
+            languages: lsp.languages,
+            extensions: lsp.extensions,
+          }
+        });
+
+        return JSON.stringify(result, null, 2)
+      },
+    });
+
+    this.toolManager.registerTool({
       id: "file_contents_to_uri",
       description:
-        "Creates a URI given some file contents to be used in the LSP methods that require a URI",
+        `Creates a URI given some file contents to be used in the LSP methods that require a URI. This is only required if the file is not on the filesystem. Otherwise you may pass the file path directly.`,
       inputSchema: {
         type: "object" as "object",
         properties: {
@@ -87,8 +107,8 @@ export class App {
       },
       handler: async (args) => {
         const { file_contents, programming_language } = args;
-        const uri = `mem://${Math.random().toString(36).substring(2, 15)}`;
         const lsp = this.lspManager.getLspByLanguage(programming_language) || this.lspManager.getDefaultLsp();
+        const uri = `mem://${Math.random().toString(36).substring(2, 15)}.${lsp.id}`;
         if (!lsp) {
           throw new Error(`No LSP found for language: ${programming_language}`);
         }
@@ -103,17 +123,15 @@ export class App {
       const id = method.id;
       const inputSchema: JSONSchema4 = this.removeInputSchemaInvariants(method.inputSchema);
 
-      if (this.lspManager.hasManyLsps()) {
-        if (inputSchema.properties?.textDocument?.properties) {
-          inputSchema.properties.textDocument.properties = {
-            ...inputSchema.properties.textDocument.properties,
-            programming_language: {
-              type: "string",
-              description:
-                "Optional programming language of the file, if not obvious from the file extension",
-            },
-          };
-        }
+      if (this.lspManager.hasManyLsps() && inputSchema.properties?.textDocument?.properties) {
+        inputSchema.properties.textDocument.properties = {
+          ...inputSchema.properties.textDocument.properties,
+          programming_language: {
+            type: "string",
+            description: "Optional programming language of the file, if not obvious from the file extension",
+            required: false,
+          },
+        };
       }
 
       this.toolManager.registerTool({
@@ -122,15 +140,15 @@ export class App {
         inputSchema: inputSchema,
         handler: (args) => {
           let lsp: LspClient | undefined;
-          if (this.lspManager.hasManyLsps()) {
-            const programmingLanguage = args.textDocument?.programming_language;
+          if (this.lspManager.hasManyLsps() && args.textDocument) {
+            const programmingLanguage = args.textDocument.programming_language;
             if (programmingLanguage) {
               lsp = this.lspManager.getLspByLanguage(programmingLanguage);
             }
 
             if (!lsp) {
               // try by file extension
-              const extension = args.textDocument?.uri?.split(".").pop();
+              const extension = args.textDocument.uri?.split(".").pop();
               if (extension) {
                 lsp = this.lspManager.getLspByExtension(extension);
               }
@@ -197,8 +215,8 @@ export class App {
       (lspConfig) =>
         new LspClientImpl(
           lspConfig.id,
-          lspConfig.extensions,
           lspConfig.languages,
+          lspConfig.extensions,
           lspConfig.command,
           lspConfig.args,
           logger,

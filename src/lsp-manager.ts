@@ -23,6 +23,8 @@ export class LspManager {
         // TODO: handle conflict
         this.extensionToLsp.set(extension.toLowerCase(), lsp);
       }
+
+      this.extensionToLsp.set(lsp.id, lsp);
     }
   }
 
