@@ -7,6 +7,13 @@
       "languages": ["typescript", "javascript"], // if the LLM sends one of these key words as the language, use this lsp
       "command": "npx",
       "args": ["-y", "typescript-language-server", "--stdio"]
+    },
+    {
+      "id": "python",
+      "extensions": ["py"],
+      "languages": ["python", "python2", "python3"],
+      "command": "uvx",
+      "args": ["--from", "python-lsp-server", "pylsp"]
     }
   ]
 }

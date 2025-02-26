@@ -172,7 +172,7 @@ async function mainConfig(
         }
 
         if (!lsp) {
-          throw new Error(`No LSP found for method: ${id}`);
+          throw new Error(`No LSP found for method: ${id} with uri: ${args.textDocument?.uri}`);
         }
 
         return lspMethodHandler(id, lsp, args)
