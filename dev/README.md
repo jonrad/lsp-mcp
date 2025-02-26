@@ -1,1 +1,1 @@
-Developer helper tools go here
+Developer helper tools and configurations go here

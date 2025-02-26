@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
-import fs from "fs/promises";
 import { nullLogger, errorLogger } from "./logger";
 import { Command, OptionValues } from "commander";
-import { Config } from "./config";
+import { Config, loadConfig } from "./config";
 import { App } from "./app";
-import stripJsonComments from "strip-json-comments";
 import { Logger } from "vscode-languageserver-protocol";
 
 async function buildConfig(options: OptionValues, logger: Logger): Promise<Config> {
@@ -13,9 +11,7 @@ async function buildConfig(options: OptionValues, logger: Logger): Promise<Confi
 
   if (options.config) {
     try {
-      config = JSON.parse(
-        stripJsonComments(await fs.readFile(options.config, "utf8")),
-      );
+      config = await loadConfig(options.config);
     } catch (e) {
       logger.error(`Failed to parse config file ${options.config}`);
       process.exit(1);

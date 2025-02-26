@@ -28,11 +28,10 @@
   },
   "scripts": {
     "build": "tsc && rimraf dist/resources && cp -R src/resources dist/",
-    "build:docker": "docker build . -t jonrad/lsp-mcp",
+    "build:docker": "docker build . -t jonrad/lsp-mcp $(if [ $# -gt 0 ]; then echo \"-t $*\"; fi)",
     "prepare": "yarn build",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "dev:simple": "yarn dev --methods textDocument/documentSymbol",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "test": "jest",
