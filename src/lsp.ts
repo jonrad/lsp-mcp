@@ -17,9 +17,13 @@ export interface LspClient {
 }
 
 export class LspClientImpl implements LspClient {
+
   protected childProcess: ChildProcess | undefined;
+
   protected connection: rpc.MessageConnection | undefined;
+
   protected capabilities: protocol.ServerCapabilities | undefined;
+
   public constructor(
     public readonly id: string,
     public readonly languages: string[],

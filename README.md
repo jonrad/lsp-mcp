@@ -113,6 +113,7 @@ yarn dev --help # Get the CLI help
 * Using the low-level MCP SDK. I think I'll need more control and it's frankly not that complicated as compared to the higher level FastMCP.
 * Using [zod](https://zod.dev/) for config validation. It's already a dependency for the MCP SDK, so no reason to overthink it.
 * I've set to always use an LSP even for unknown languages (eg LLM provides a textDocument/documentSymbol request for python but there is no python LSP registered). I'll probably revisit this decision.
+* Decided to make the LSPs start only when they are asked something. May make configurable later, but for now this prevents overuse of resources.
 
 ### Roadmap
 This is just a list of things I'd like to do eventually. There is no timeline or order for these.
