@@ -6,8 +6,6 @@ import * as protocol from "vscode-languageserver-protocol";
 import { Logger } from "vscode-jsonrpc";
 import path from "path";
 
-const URI_SCHEME = "lsp";
-
 export interface LspClient {
   id: string;
   languages: string[];
@@ -16,10 +14,6 @@ export interface LspClient {
   dispose: () => void;
   sendRequest(method: string, args: any): Promise<any>;
   sendNotification(method: string, args: any): Promise<void>;
-}
-
-function buildUri(...paths: string[]) {
-  return `${URI_SCHEME}://` + path.resolve(...paths);
 }
 
 export class LspClientImpl implements LspClient {
@@ -73,7 +67,7 @@ export class LspClientImpl implements LspClient {
 
     const response = await connection.sendRequest(InitializeRequest.type, {
       processId: process.pid,
-      rootUri: buildUri('/'),
+      rootUri: "file:///", // TODO: figure out the best way to handle this
       capabilities: capabilities,
     });
 

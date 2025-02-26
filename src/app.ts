@@ -61,7 +61,7 @@ export class App {
       const serialized = typeof result === "string" ? result : JSON.stringify(result, null, 2);
 
       return {
-        content: [{ type: "text", text: result }],
+        content: [{ type: "text", text: serialized }],
       };
     });
   }

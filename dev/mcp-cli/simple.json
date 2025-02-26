@@ -4,7 +4,7 @@
       "command": "sh",
       "args": [
         "-c",
-        "yarn dev:simple  --lsp 'npx -y typescript-language-server --stdio' --methods textDocument/documentSymbol | tee mcp.log"
+        "yarn dev:simple --lsp 'npx -y typescript-language-server --stdio' | tee mcp.log"
       ]
     }
   }

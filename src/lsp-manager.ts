@@ -33,7 +33,7 @@ export class LspManager {
   }
 
   getLsps(): LspClient[] {
-    return Array.from(this.lsps.values()).map((lsp) => lsp);
+    return Array.from(this.lsps.values());
   }
 
   getLspByLanguage(language: string): LspClient | undefined {

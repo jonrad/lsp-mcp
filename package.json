@@ -32,6 +32,7 @@
     "prepare": "yarn build",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
+    "dev:simple": "yarn dev --methods textDocument/documentSymbol",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
     "test": "jest",
