@@ -9,6 +9,9 @@ const ConfigSchema = z.object({
     command: z.string(),
     args: z.array(z.string()),
   })),
+  methods: z.optional(z.array(z.string()), {
+    description: "LSP methods to enable, if not provided, all methods will be enabled",
+  }),
 });
 
 export type Config = z.infer<typeof ConfigSchema>;

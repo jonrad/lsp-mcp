@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
 import fs from "fs/promises";
-import { LspClientImpl } from "./lsp";
 import { createMcp } from "./mcp";
 import { getLspMethods } from "./lsp-methods";
 import { nullLogger, consoleLogger, errorLogger } from "./logger";
 import { Command } from "commander";
 import { Config } from "./config";
-import { App, buildLsps } from "./app";
-import { LspManager } from "./lsp-manager";
+import { App } from "./app";
 import stripJsonComments from "strip-json-comments";
 import { Logger } from "vscode-languageserver-protocol";
 
@@ -16,21 +14,7 @@ async function mainConfig(
   config: Config,
   methods: string[] | undefined = undefined,
   logger: Logger = nullLogger,
-) {
-  const lspMethods = await getLspMethods(methods);
-
-  const lsps = new LspManager(buildLsps(config.lsps, logger));
-  const mcp = createMcp();
-
-  const app = new App(
-    lsps,
-    lspMethods,
-    mcp,
-    logger
-  );
-
-  await app.start();
-}
+) {}
 
 async function main() {
   const program = new Command();
@@ -39,12 +23,13 @@ async function main() {
     .name("lsp-mcp")
     .description("A tool for providing LSP requests to MCP")
     .version("0.1.0")
-    .option("-m, --methods [string...]", "LSP methods to enabled (Default: all)")
     .option(
-      "-l, --lsp [string]",
+      "-m, --methods [string...]",
+      "LSP methods to enabled (Default: all)",
+    )
+    .option(
+      "-l, --lsp <string>",
       "LSP command to start (note: command is passed through sh -c)",
-      // TODO: move this to package.json or something
-      `npx -y typescript-language-server --stdio`
     )
     .option("-v, --verbose", "Verbose output (Dev only, don't use with MCP)")
     .option("-c, --config [string]", "Path to config file")
@@ -52,34 +37,53 @@ async function main() {
 
   const options = program.opts();
 
+  // UGH i really need to start using a proper logging lib
   const logger = options.verbose ? errorLogger : nullLogger;
-
   logger.info(`Running with: ${JSON.stringify(options)}`);
+
+  let config: Config | undefined;
+
   if (options.config) {
-    const config = JSON.parse(
-      stripJsonComments(
-        await fs.readFile(options.config, "utf8")
-      )
-    );
-    await mainConfig(
-      config,
-      options.methods,
-      logger
-    );
+    try {
+      config = JSON.parse(
+        stripJsonComments(await fs.readFile(options.config, "utf8")),
+      );
+    } catch (e) {
+      logger.error(`Failed to parse config file ${options.config}`);
+      process.exit(1);
+    }
+
+    if (config === undefined) {
+      logger.error(`Failed to parse config file ${options.config}`);
+      process.exit(1);
+    }
   } else {
-    await mainConfig(
-      {
-        lsps: [{
+    if (!options.lsp) {
+      logger.error("No LSP command provided");
+      process.exit(1);
+    }
+
+    config = {
+      lsps: [
+        {
           id: "lsp",
           extensions: [],
           languages: [],
           command: "sh",
           args: ["-c", options.lsp],
-        }]
-      },
-      options.methods,
-      logger
-    );
+        },
+      ],
+      methods: options.methods,
+    };
+  }
+
+  const app = new App(config, logger);
+
+  try {
+    await app.start();
+  } catch (e: any) {
+    logger.error(e.toString?.());
+    process.exit(1);
   }
 }
 

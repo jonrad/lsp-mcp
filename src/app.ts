@@ -1,11 +1,11 @@
 
 import { LspClient, LspClientImpl } from "./lsp";
-import { startMcp } from "./mcp";
+import { createMcp, startMcp } from "./mcp";
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { lspMethodHandler, LSPMethods, openFileContents } from "./lsp-methods";
+import { getLspMethods, lspMethodHandler, LSPMethods, openFileContents } from "./lsp-methods";
 import { ToolManager } from "./tool-manager";
 import { Logger } from "vscode-jsonrpc";
 import { Config } from "./config";
@@ -22,14 +22,18 @@ export interface LspMeta {
 
 export class App {
   private readonly toolManager: ToolManager;
+  private readonly lspManager: LspManager;
+  private readonly mcp: McpServer;
+  private readonly lspMethods: Promise<LSPMethods[]>;
 
   constructor(
-    public readonly lsps: LspManager,
-    public readonly lspMethods: LSPMethods[],
-    public readonly mcp: McpServer,
-    public readonly logger: Logger,
+    config: Config,
+    private readonly logger: Logger,
   ) {
     this.toolManager = new ToolManager(logger);
+    this.lspManager = new LspManager(this.buildLsps(config.lsps, logger));
+    this.mcp = createMcp();
+    this.lspMethods = getLspMethods(config.methods);
 
     // Cleanup on any signal
     process.on('SIGINT', () => this.dispose());
@@ -85,7 +89,7 @@ export class App {
       handler: async (args) => {
         const { file_contents, programming_language } = args;
         const uri = `mem://${Math.random().toString(36).substring(2, 15)}`;
-        const lsp = this.lsps.getLspByLanguage(programming_language);
+        const lsp = this.lspManager.getLspByLanguage(programming_language);
         if (!lsp) {
           throw new Error(`No LSP found for language: ${programming_language}`);
         }
@@ -96,7 +100,7 @@ export class App {
       },
     });
 
-    this.lspMethods.forEach((method) => {
+    (await this.lspMethods).forEach((method) => {
       const id = method.id;
       const inputSchema: JSONSchema4 = this.removeInputSchemaInvariants(method.inputSchema);
 
@@ -109,9 +113,6 @@ export class App {
               "Optional programming language of the file, if not obvious from the file extension",
           },
         };
-        this.logger.log(
-          `textDocument inputSchema: ${JSON.stringify(inputSchema.properties.textDocument, null, 2)}`,
-        );
       }
 
       this.toolManager.registerTool({
@@ -122,14 +123,14 @@ export class App {
           let lsp: LspClient | undefined;
           const programmingLanguage = args.textDocument?.programming_language;
           if (programmingLanguage) {
-            lsp = this.lsps.getLspByLanguage(programmingLanguage);
+            lsp = this.lspManager.getLspByLanguage(programmingLanguage);
           }
 
           if (!lsp) {
             // try by file extension
             const extension = args.textDocument?.uri?.split(".").pop();
             if (extension) {
-              lsp = this.lsps.getLspByExtension(extension);
+              lsp = this.lspManager.getLspByExtension(extension);
             }
           }
 
@@ -150,13 +151,13 @@ export class App {
     await this.registerMcp(),
 
     // TODO!!! REMOVE
-    await Promise.all(this.lsps.getLsps().map((lsp) => lsp.start()));
+    await Promise.all(this.lspManager.getLsps().map((lsp) => lsp.start()));
     await startMcp(this.mcp);
   }
 
   public async dispose() {
-    if (this.lsps !== undefined) {
-      this.lsps.getLsps().forEach((lsp) => lsp.dispose());
+    if (this.lspManager !== undefined) {
+      this.lspManager.getLsps().forEach((lsp) => lsp.dispose());
     }
 
     if (this.mcp !== undefined) {

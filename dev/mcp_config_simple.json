@@ -2,7 +2,10 @@
   "mcpServers": {
     "lsp": {
       "command": "sh",
-      "args": ["-c", "yarn dev:simple | tee mcp.log"]
+      "args": [
+        "-c",
+        "yarn dev:simple  --lsp 'npx -y typescript-language-server --stdio' --methods textDocument/documentSymbol | tee mcp.log"
+      ]
     }
   }
 }
