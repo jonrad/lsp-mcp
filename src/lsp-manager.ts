@@ -5,8 +5,10 @@ export class LspManager {
   private readonly lsps: Map<string, LspMeta>;
   private readonly languageToLsp: Map<string, LspMeta>;
   private readonly extensionToLsp: Map<string, LspMeta>;
+  private readonly defaultLsp: LspMeta;
 
   constructor(lsps: LspMeta[]) {
+    this.defaultLsp = lsps[0];
     this.lsps = new Map(lsps.map((lsp) => [lsp.id, lsp]));
 
     // Build language lookup map
@@ -39,5 +41,13 @@ export class LspManager {
 
   getLspByExtension(extension: string): LspClient | undefined {
     return this.extensionToLsp.get(extension.toLowerCase())?.lsp;
+  }
+
+  getDefaultLsp(): LspClient {
+    return this.defaultLsp.lsp;
+  }
+
+  hasManyLsps(): boolean {
+    return this.lsps.size > 1;
   }
 }

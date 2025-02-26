@@ -28,7 +28,7 @@ export class App {
 
   constructor(
     config: Config,
-    private readonly logger: Logger,
+    logger: Logger,
   ) {
     this.toolManager = new ToolManager(logger);
     this.lspManager = new LspManager(this.buildLsps(config.lsps, logger));
@@ -79,17 +79,19 @@ export class App {
           file_contents: {
             type: "string",
             description: "The contents of the file",
+            required: true,
           },
           programming_language: {
             type: "string",
             description: "The programming language of the file",
+            required: false,
           },
         },
       },
       handler: async (args) => {
         const { file_contents, programming_language } = args;
         const uri = `mem://${Math.random().toString(36).substring(2, 15)}`;
-        const lsp = this.lspManager.getLspByLanguage(programming_language);
+        const lsp = this.lspManager.getLspByLanguage(programming_language) || this.lspManager.getDefaultLsp();
         if (!lsp) {
           throw new Error(`No LSP found for language: ${programming_language}`);
         }
@@ -104,15 +106,17 @@ export class App {
       const id = method.id;
       const inputSchema: JSONSchema4 = this.removeInputSchemaInvariants(method.inputSchema);
 
-      if (inputSchema.properties?.textDocument?.properties) {
-        inputSchema.properties.textDocument.properties = {
-          ...inputSchema.properties.textDocument.properties,
-          programming_language: {
-            type: "string",
-            description:
-              "Optional programming language of the file, if not obvious from the file extension",
-          },
-        };
+      if (this.lspManager.hasManyLsps()) {
+        if (inputSchema.properties?.textDocument?.properties) {
+          inputSchema.properties.textDocument.properties = {
+            ...inputSchema.properties.textDocument.properties,
+            programming_language: {
+              type: "string",
+              description:
+                "Optional programming language of the file, if not obvious from the file extension",
+            },
+          };
+        }
       }
 
       this.toolManager.registerTool({
@@ -121,23 +125,23 @@ export class App {
         inputSchema: inputSchema,
         handler: (args) => {
           let lsp: LspClient | undefined;
-          const programmingLanguage = args.textDocument?.programming_language;
-          if (programmingLanguage) {
-            lsp = this.lspManager.getLspByLanguage(programmingLanguage);
-          }
+          if (this.lspManager.hasManyLsps()) {
+            const programmingLanguage = args.textDocument?.programming_language;
+            if (programmingLanguage) {
+              lsp = this.lspManager.getLspByLanguage(programmingLanguage);
+            }
 
-          if (!lsp) {
-            // try by file extension
-            const extension = args.textDocument?.uri?.split(".").pop();
-            if (extension) {
-              lsp = this.lspManager.getLspByExtension(extension);
+            if (!lsp) {
+              // try by file extension
+              const extension = args.textDocument?.uri?.split(".").pop();
+              if (extension) {
+                lsp = this.lspManager.getLspByExtension(extension);
+              }
             }
           }
 
           if (!lsp) {
-            throw new Error(
-              `No LSP found for method: ${id} with uri: ${args.textDocument?.uri}`,
-            );
+            lsp = this.lspManager.getDefaultLsp();
           }
 
           return lspMethodHandler(id, lsp, args);
