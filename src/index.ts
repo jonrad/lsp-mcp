@@ -14,7 +14,7 @@ import { loadConfig } from "./config";
 import { Logger } from "vscode-jsonrpc";
 import { Config } from "./config";
 import { Server as McpServer } from "@modelcontextprotocol/sdk/server/index.js";
-import { JSONSchema4 } from "json-schema";
+import { JSONSchema4, JSONSchema4TypeName } from "json-schema";
 class LspManager {
   private readonly lsps: Map<string, LspMeta>;
   private readonly languageToLsp: Map<string, LspMeta>;
@@ -180,11 +180,39 @@ async function mainConfig(
     });
   });
 
+  // Remove invariant types from the input schema since some MCPs have a hard time with them
+  // Looking at you mcp-client-cli
+  function removeInvariants(inputSchema: JSONSchema4): JSONSchema4 {
+    let type = inputSchema.type;
+    if (type && type.length) {
+      if (type.length === 1) {
+        type = type[0] as JSONSchema4TypeName;
+      } else if (type.includes('string')) {
+        type = 'string';
+      } else {
+        // guess
+        type = type[0] as JSONSchema4TypeName;
+      }
+    }
+    return {
+      ...inputSchema,
+      type: type,
+      properties: inputSchema.properties
+        ? Object.fromEntries(
+            Object.entries(inputSchema.properties).map(([key, value]) => [
+              key,
+              removeInvariants(value),
+            ]),
+          )
+        : undefined,
+    };
+  }
+
   mcp.setRequestHandler(ListToolsRequestSchema, async () => {
     const mcpTools = toolManager.getTools().map((tool) => ({
       name: tool.id,
       description: tool.description,
-      inputSchema: tool.inputSchema,
+      inputSchema: removeInvariants(tool.inputSchema),
     }));
 
     return {
