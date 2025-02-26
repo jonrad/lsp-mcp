@@ -58,7 +58,7 @@ async function openFile(lsp: LspClient, file: string, uri: string): Promise<void
   await openFileContents(lsp, uri, contents);
 }
 
-export async function lspMethodHandler(methodId: string, lsp: LspClient, args: Record<string, any>): Promise<string> {
+export async function lspMethodHandler(lsp: LspClient, methodId: string, args: Record<string, any>): Promise<string> {
   const lspArgs = { ...args };
   // For uris, we need to tell the LSP about the file contents
   // This helper makes the LLM's work easier (and less likely to break) by not requiring the LLM to have to handle opening files itself

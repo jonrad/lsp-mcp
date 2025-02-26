@@ -1,13 +1,12 @@
-import { LspMeta } from "./app";
 import { LspClient } from "./lsp";
 
 export class LspManager {
-  private readonly lsps: Map<string, LspMeta>;
-  private readonly languageToLsp: Map<string, LspMeta>;
-  private readonly extensionToLsp: Map<string, LspMeta>;
-  private readonly defaultLsp: LspMeta;
+  private readonly lsps: Map<string, LspClient>;
+  private readonly languageToLsp: Map<string, LspClient>;
+  private readonly extensionToLsp: Map<string, LspClient>;
+  private readonly defaultLsp: LspClient;
 
-  constructor(lsps: LspMeta[]) {
+  constructor(lsps: LspClient[]) {
     this.defaultLsp = lsps[0];
     this.lsps = new Map(lsps.map((lsp) => [lsp.id, lsp]));
 
@@ -28,23 +27,23 @@ export class LspManager {
   }
 
   getLsp(id: string): LspClient | undefined {
-    return this.lsps.get(id)?.lsp;
+    return this.lsps.get(id);
   }
 
   getLsps(): LspClient[] {
-    return Array.from(this.lsps.values()).map((lsp) => lsp.lsp);
+    return Array.from(this.lsps.values()).map((lsp) => lsp);
   }
 
   getLspByLanguage(language: string): LspClient | undefined {
-    return this.languageToLsp.get(language.toLowerCase())?.lsp;
+    return this.languageToLsp.get(language.toLowerCase());
   }
 
   getLspByExtension(extension: string): LspClient | undefined {
-    return this.extensionToLsp.get(extension.toLowerCase())?.lsp;
+    return this.extensionToLsp.get(extension.toLowerCase());
   }
 
   getDefaultLsp(): LspClient {
-    return this.defaultLsp.lsp;
+    return this.defaultLsp;
   }
 
   hasManyLsps(): boolean {

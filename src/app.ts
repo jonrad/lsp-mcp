@@ -13,13 +13,6 @@ import { Server as McpServer } from "@modelcontextprotocol/sdk/server/index.js";
 import { JSONSchema4, JSONSchema4TypeName } from "json-schema";
 import { LspManager } from "./lsp-manager";
 
-export interface LspMeta {
-  id: string;
-  extensions: string[];
-  languages: string[];
-  lsp: LspClient;
-}
-
 export class App {
   private readonly toolManager: ToolManager;
   private readonly lspManager: LspManager;
@@ -30,9 +23,13 @@ export class App {
     config: Config,
     logger: Logger,
   ) {
+    // keeps track of all the tools we're sending to the MCP
     this.toolManager = new ToolManager(logger);
+    // keeps track of all the LSP Clients we're using
     this.lspManager = new LspManager(this.buildLsps(config.lsps, logger));
+    // the MCP server
     this.mcp = createMcp();
+    // The LSP methods we support (textDocument/foo, etc)
     this.lspMethods = getLspMethods(config.methods);
 
     // Cleanup on any signal
@@ -41,7 +38,7 @@ export class App {
     process.on('exit', () => this.dispose());
   }
 
-  private async registerMcp() {
+  private async initializeMcp() {
     this.mcp.setRequestHandler(ListToolsRequestSchema, async () => {
       const mcpTools = this.toolManager.getTools().map((tool) => ({
         name: tool.id,
@@ -144,7 +141,7 @@ export class App {
             lsp = this.lspManager.getDefaultLsp();
           }
 
-          return lspMethodHandler(id, lsp, args);
+          return lspMethodHandler(lsp, id, args);
         },
       });
     });
@@ -152,10 +149,8 @@ export class App {
 
   public async start() {
     await this.registerTools(),
-    await this.registerMcp(),
+    await this.initializeMcp(),
 
-    // TODO!!! REMOVE
-    await Promise.all(this.lspManager.getLsps().map((lsp) => lsp.start()));
     await startMcp(this.mcp);
   }
 
@@ -197,12 +192,17 @@ export class App {
     };
   }
 
-  private buildLsps(lspConfigs: Config["lsps"], logger: Logger): LspMeta[] {
-    return lspConfigs.map((lspConfig) => ({
-      id: lspConfig.id,
-      extensions: lspConfig.extensions,
-      languages: lspConfig.languages,
-      lsp: new LspClientImpl(lspConfig.command, lspConfig.args, logger)
-    }));
+  private buildLsps(lspConfigs: Config["lsps"], logger: Logger): LspClient[] {
+    return lspConfigs.map(
+      (lspConfig) =>
+        new LspClientImpl(
+          lspConfig.id,
+          lspConfig.extensions,
+          lspConfig.languages,
+          lspConfig.command,
+          lspConfig.args,
+          logger,
+        ),
+    );
   }
 }

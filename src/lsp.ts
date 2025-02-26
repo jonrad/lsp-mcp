@@ -3,14 +3,15 @@ import * as rpc from "vscode-jsonrpc";
 import { StreamMessageReader, StreamMessageWriter } from "vscode-jsonrpc/node";
 import { InitializeRequest } from "vscode-languageserver-protocol";
 import * as protocol from "vscode-languageserver-protocol";
-import { ClientCapabilities } from "vscode-languageserver-protocol/lib/common/protocol";
-import { consoleLogger } from "./logger";
 import { Logger } from "vscode-jsonrpc";
 import path from "path";
 
 const URI_SCHEME = "lsp";
 
 export interface LspClient {
+  id: string;
+  languages: string[];
+  extensions: string[];
   start(): Promise<void>;
   dispose: () => void;
   sendRequest(method: string, args: any): Promise<any>;
@@ -21,21 +22,14 @@ function buildUri(...paths: string[]) {
   return `${URI_SCHEME}://` + path.resolve(...paths);
 }
 
-export async function startLsp(
-  command: string,
-  args: string[],
-  logger: Logger = consoleLogger,
-): Promise<LspClient> {
-  const lsp = new LspClientImpl(command, args, logger);
-  await lsp.start();
-  return lsp;
-}
-
 export class LspClientImpl implements LspClient {
   protected childProcess: ChildProcess | undefined;
   protected connection: rpc.MessageConnection | undefined;
   protected capabilities: protocol.ServerCapabilities | undefined;
   public constructor(
+    public readonly id: string,
+    public readonly languages: string[],
+    public readonly extensions: string[],
     private readonly command: string,
     private readonly args: string[],
     private readonly logger: Logger, // TODO: better long term solution for logging
