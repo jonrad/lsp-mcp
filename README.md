@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/jonrad-lsp-mcp-badge.png)](https://mseep.ai/app/jonrad-lsp-mcp)
+
 # LSP MCP
 An Model Context Protocol (MCP) server that provides LLMs/AI Agents with the capabilities of a language server protocol (LSP) server. This gives the AI the ability to get language aware context from the codebase.
 
