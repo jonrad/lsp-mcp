@@ -39,12 +39,8 @@ export const consoleLogger: Logger = {
 };
 
 export const nullLogger: Logger = {
-  error: (message: string) => {
-  },
-  warn: (message: string) => {
-  },
-  info: (message: string) => {
-  },
-  log: (message: string) => {
-  },
+  error: (_message: string) => {},
+  warn: (_message: string) => {},
+  info: (_message: string) => {},
+  log: (_message: string) => {},
 };

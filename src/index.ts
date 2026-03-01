@@ -6,14 +6,19 @@ import { Config, loadConfig } from "./config";
 import { App } from "./app";
 import { Logger } from "vscode-languageserver-protocol";
 
-async function buildConfig(options: OptionValues, logger: Logger): Promise<Config> {
+async function buildConfig(
+  options: OptionValues,
+  logger: Logger,
+): Promise<Config> {
   let config: Config | undefined;
 
   if (options.config) {
     try {
       config = await loadConfig(options.config);
-    } catch (e) {
-      logger.error(`Failed to parse config file ${options.config}`);
+    } catch (e: any) {
+      logger.error(
+        `Failed to parse config file ${options.config}: ${e?.message ?? e}`,
+      );
       process.exit(1);
     }
 
@@ -27,16 +32,19 @@ async function buildConfig(options: OptionValues, logger: Logger): Promise<Confi
       process.exit(1);
     }
 
+    const shell = process.platform === "win32" ? "cmd.exe" : "sh";
+    const shellArg = process.platform === "win32" ? "/c" : "-c";
+
     config = {
       lsps: [
         {
           id: "lsp",
           extensions: [],
           languages: [],
-          command: "sh",
-          args: ["-c", options.lsp],
+          command: shell,
+          args: [shellArg, options.lsp],
         },
-      ]
+      ],
     };
   }
 
@@ -68,7 +76,7 @@ async function main() {
     )
     .option(
       "-w, --workspace [string]",
-      "Path to the workspace to use for the LSP. Defaults to /"
+      "Path to the workspace to use for the LSP. Defaults to /",
     )
     .option("-v, --verbose", "Verbose output (Dev only, don't use with MCP)")
     .option("-c, --config [string]", "Path to config file")
@@ -82,6 +90,15 @@ async function main() {
 
   const config = await buildConfig(options, logger);
   const app = new App(config, logger);
+
+  // Ensure clean exit when stdin closes (e.g. when piping a single request)
+  process.stdin.on("end", async () => {
+    // Give it a moment to finish any pending work
+    setTimeout(async () => {
+      await app.dispose();
+      process.exit(0);
+    }, 100);
+  });
 
   try {
     await app.start();

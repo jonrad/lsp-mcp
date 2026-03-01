@@ -1,0 +1,27 @@
+{
+  "lsps": [
+    {
+      "id": "perlnavigator",
+      "languages": ["perl"],
+      "extensions": ["pl", "pm", "t"],
+      "command": "cmd.exe",
+      "args": ["/c", "c:\\data\\michele\\bin\\perlnavigator.exe --stdio"],
+      "settings": {
+        "perlnavigator": {
+          "perlPath": "perl",
+          "enableWarnings": true,
+          "perlcriticEnabled": true,
+          "perlcriticSeverity": 5,
+          "includePaths": [
+            "C:\\data\\michele\\openqa_xp\\openQA\\lib",
+            "C:\\data\\michele\\openqa_xp\\openQA\\t\\lib",
+            "C:\\data\\michele\\openqa_xp\\openQA\\external\\os-autoinst-common\\lib"
+          ],
+          "includeLib": true,
+          "perlCompileEnabled": true
+        }
+      }
+    }
+  ],
+  "workspace": "C:\\data\\michele\\openqa_xp\\openQA"
+}

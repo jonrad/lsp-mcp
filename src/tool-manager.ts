@@ -18,7 +18,10 @@ export class ToolManager {
     this.toolsById.set(tool.id, tool);
   }
 
-  public async callTool(id: string, args: Record<string, any>): Promise<string> {
+  public async callTool(
+    id: string,
+    args: Record<string, any>,
+  ): Promise<string> {
     const tool = this.getTool(id);
     if (!tool) {
       throw new Error(`Tool ${id} not found`);
@@ -34,4 +37,3 @@ export class ToolManager {
     return this.toolsById.get(id);
   }
 }
-

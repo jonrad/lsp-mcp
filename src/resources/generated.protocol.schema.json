@@ -14,9 +14,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "edit"
-      ],
+      "required": ["edit"],
       "type": "object"
     },
     "ApplyWorkspaceEditResponse": {
@@ -36,9 +34,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "applied"
-      ],
+      "required": ["applied"],
       "type": "object"
     },
     "CancelParams": {
@@ -46,15 +42,10 @@
       "properties": {
         "id": {
           "description": "The request id to cancel.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         }
       },
-      "required": [
-        "id"
-      ],
+      "required": ["id"],
       "type": "object"
     },
     "ClientCapabilities": {
@@ -126,9 +117,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "title"
-      ],
+      "required": ["title"],
       "type": "object"
     },
     "CodeActionClientCapabilities": {
@@ -151,15 +140,11 @@
                   "type": "array"
                 }
               },
-              "required": [
-                "valueSet"
-              ],
+              "required": ["valueSet"],
               "type": "object"
             }
           },
-          "required": [
-            "codeActionKind"
-          ],
+          "required": ["codeActionKind"],
           "type": "object"
         },
         "dynamicRegistration": {
@@ -192,9 +177,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "diagnostics"
-      ],
+      "required": ["diagnostics"],
       "type": "object"
     },
     "CodeActionKind": {
@@ -243,11 +226,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument",
-        "range",
-        "context"
-      ],
+      "required": ["textDocument", "range", "context"],
       "type": "object"
     },
     "CodeLens": {
@@ -266,9 +245,7 @@
           "description": "The range in which this code lens is valid. Should only span a single line."
         }
       },
-      "required": [
-        "range"
-      ],
+      "required": ["range"],
       "type": "object"
     },
     "CodeLensClientCapabilities": {
@@ -313,9 +290,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument"
-      ],
+      "required": ["textDocument"],
       "type": "object"
     },
     "Color": {
@@ -339,12 +314,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "red",
-        "green",
-        "blue",
-        "alpha"
-      ],
+      "required": ["red", "green", "blue", "alpha"],
       "type": "object"
     },
     "ColorInformation": {
@@ -360,10 +330,7 @@
           "description": "The range in the document where this color appers."
         }
       },
-      "required": [
-        "range",
-        "color"
-      ],
+      "required": ["range", "color"],
       "type": "object"
     },
     "ColorPresentation": {
@@ -386,9 +353,7 @@
           "description": "An [edit](#TextEdit) which is applied to a document when selecting\r\nthis presentation for the color.  When `falsy` the [label](#ColorPresentation.label)\r\nis used."
         }
       },
-      "required": [
-        "label"
-      ],
+      "required": ["label"],
       "type": "object"
     },
     "ColorPresentationParams": {
@@ -416,11 +381,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument",
-        "color",
-        "range"
-      ],
+      "required": ["textDocument", "color", "range"],
       "type": "object"
     },
     "Command": {
@@ -429,8 +390,7 @@
       "properties": {
         "arguments": {
           "description": "Arguments that the command handler should be\r\ninvoked with.",
-          "items": {
-          },
+          "items": {},
           "type": "array"
         },
         "command": {
@@ -442,10 +402,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "title",
-        "command"
-      ],
+      "required": ["title", "command"],
       "type": "object"
     },
     "CompletionClientCapabilities": {
@@ -491,9 +448,7 @@
                   "type": "array"
                 }
               },
-              "required": [
-                "valueSet"
-              ],
+              "required": ["valueSet"],
               "type": "object"
             }
           },
@@ -536,9 +491,7 @@
           "description": "How the completion was triggered."
         }
       },
-      "required": [
-        "triggerKind"
-      ],
+      "required": ["triggerKind"],
       "type": "object"
     },
     "CompletionItem": {
@@ -625,47 +578,20 @@
           "description": "An [edit](#TextEdit) which is applied to a document when selecting\r\nthis completion. When an edit is provided the value of\r\n[insertText](#CompletionItem.insertText) is ignored.\r\n\r\n*Note:* The text edit's range must be a [single line] and it must contain the position\r\nat which completion has been requested."
         }
       },
-      "required": [
-        "label"
-      ],
+      "required": ["label"],
       "type": "object"
     },
     "CompletionItemKind": {
       "description": "The kind of a completion entry.",
       "enum": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        25
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24, 25
       ],
       "type": "number"
     },
     "CompletionItemTag": {
       "description": "Completion item tags are extra annotations that tweak the rendering of a completion\r\nitem.",
-      "enum": [
-        1
-      ],
+      "enum": [1],
       "type": "number"
     },
     "CompletionList": {
@@ -684,10 +610,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "isIncomplete",
-        "items"
-      ],
+      "required": ["isIncomplete", "items"],
       "type": "object"
     },
     "CompletionOptions": {
@@ -743,19 +666,12 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "position",
-        "textDocument"
-      ],
+      "required": ["position", "textDocument"],
       "type": "object"
     },
     "CompletionTriggerKind": {
       "description": "How a completion was triggered",
-      "enum": [
-        1,
-        2,
-        3
-      ],
+      "enum": [1, 2, 3],
       "type": "number"
     },
     "ConfigurationItem": {
@@ -783,9 +699,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "items"
-      ],
+      "required": ["items"],
       "type": "object"
     },
     "CreateFile": {
@@ -794,9 +708,7 @@
       "properties": {
         "kind": {
           "description": "A create",
-          "enum": [
-            "create"
-          ],
+          "enum": ["create"],
           "type": "string"
         },
         "options": {
@@ -808,10 +720,7 @@
           "description": "The resource to create."
         }
       },
-      "required": [
-        "kind",
-        "uri"
-      ],
+      "required": ["kind", "uri"],
       "type": "object"
     },
     "CreateFileOptions": {
@@ -875,9 +784,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "documentSelector"
-      ],
+      "required": ["documentSelector"],
       "type": "object"
     },
     "DefinitionClientCapabilities": {
@@ -911,9 +818,7 @@
       "properties": {
         "kind": {
           "description": "A delete",
-          "enum": [
-            "delete"
-          ],
+          "enum": ["delete"],
           "type": "string"
         },
         "options": {
@@ -925,10 +830,7 @@
           "description": "The file to delete."
         }
       },
-      "required": [
-        "kind",
-        "uri"
-      ],
+      "required": ["kind", "uri"],
       "type": "object"
     },
     "DeleteFileOptions": {
@@ -952,10 +854,7 @@
       "properties": {
         "code": {
           "description": "The diagnostic's code, which usually appear in the user interface.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "message": {
           "description": "The diagnostic's message. It usually appears in the user interface",
@@ -988,10 +887,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "range",
-        "message"
-      ],
+      "required": ["range", "message"],
       "type": "object"
     },
     "DiagnosticRelatedInformation": {
@@ -1007,28 +903,17 @@
           "type": "string"
         }
       },
-      "required": [
-        "location",
-        "message"
-      ],
+      "required": ["location", "message"],
       "type": "object"
     },
     "DiagnosticSeverity": {
       "description": "The diagnostic's severity.",
-      "enum": [
-        1,
-        2,
-        3,
-        4
-      ],
+      "enum": [1, 2, 3, 4],
       "type": "number"
     },
     "DiagnosticTag": {
       "description": "The diagnostic tags.",
-      "enum": [
-        1,
-        2
-      ],
+      "enum": [1, 2],
       "type": "number"
     },
     "DidChangeConfigurationClientCapabilities": {
@@ -1049,9 +934,7 @@
           "description": "The actual changed settings"
         }
       },
-      "required": [
-        "settings"
-      ],
+      "required": ["settings"],
       "type": "object"
     },
     "DidChangeTextDocumentParams": {
@@ -1070,10 +953,7 @@
           "description": "The document that did change. The version number points\nto the version after all provided content changes have\nbeen applied."
         }
       },
-      "required": [
-        "textDocument",
-        "contentChanges"
-      ],
+      "required": ["textDocument", "contentChanges"],
       "type": "object"
     },
     "DidChangeWatchedFilesClientCapabilities": {
@@ -1098,9 +978,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "changes"
-      ],
+      "required": ["changes"],
       "type": "object"
     },
     "DidChangeWorkspaceFoldersParams": {
@@ -1112,9 +990,7 @@
           "description": "The actual workspace folder change event."
         }
       },
-      "required": [
-        "event"
-      ],
+      "required": ["event"],
       "type": "object"
     },
     "DidCloseTextDocumentParams": {
@@ -1126,9 +1002,7 @@
           "description": "The document that was closed."
         }
       },
-      "required": [
-        "textDocument"
-      ],
+      "required": ["textDocument"],
       "type": "object"
     },
     "DidOpenTextDocumentParams": {
@@ -1140,9 +1014,7 @@
           "description": "The document that was opened."
         }
       },
-      "required": [
-        "textDocument"
-      ],
+      "required": ["textDocument"],
       "type": "object"
     },
     "DidSaveTextDocumentParams": {
@@ -1158,9 +1030,7 @@
           "description": "The document that was closed."
         }
       },
-      "required": [
-        "textDocument"
-      ],
+      "required": ["textDocument"],
       "type": "object"
     },
     "DocumentColorClientCapabilities": {
@@ -1203,9 +1073,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument"
-      ],
+      "required": ["textDocument"],
       "type": "object"
     },
     "DocumentColorRegistrationOptions": {
@@ -1234,9 +1102,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "documentSelector"
-      ],
+      "required": ["documentSelector"],
       "type": "object"
     },
     "DocumentFilter": {
@@ -1257,9 +1123,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "language"
-          ],
+          "required": ["language"],
           "type": "object"
         },
         {
@@ -1278,9 +1142,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "scheme"
-          ],
+          "required": ["scheme"],
           "type": "object"
         },
         {
@@ -1299,9 +1161,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "pattern"
-          ],
+          "required": ["pattern"],
           "type": "object"
         }
       ],
@@ -1345,10 +1205,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument",
-        "options"
-      ],
+      "required": ["textDocument", "options"],
       "type": "object"
     },
     "DocumentHighlight": {
@@ -1364,9 +1221,7 @@
           "description": "The range this highlight applies to."
         }
       },
-      "required": [
-        "range"
-      ],
+      "required": ["range"],
       "type": "object"
     },
     "DocumentHighlightClientCapabilities": {
@@ -1382,11 +1237,7 @@
     },
     "DocumentHighlightKind": {
       "description": "A document highlight kind.",
-      "enum": [
-        1,
-        2,
-        3
-      ],
+      "enum": [1, 2, 3],
       "type": "number"
     },
     "DocumentHighlightOptions": {
@@ -1419,9 +1270,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "range"
-      ],
+      "required": ["range"],
       "type": "object"
     },
     "DocumentLinkClientCapabilities": {
@@ -1470,9 +1319,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument"
-      ],
+      "required": ["textDocument"],
       "type": "object"
     },
     "DocumentOnTypeFormattingClientCapabilities": {
@@ -1502,9 +1349,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "firstTriggerCharacter"
-      ],
+      "required": ["firstTriggerCharacter"],
       "type": "object"
     },
     "DocumentOnTypeFormattingParams": {
@@ -1528,12 +1373,7 @@
           "description": "The document to format."
         }
       },
-      "required": [
-        "textDocument",
-        "position",
-        "ch",
-        "options"
-      ],
+      "required": ["textDocument", "position", "ch", "options"],
       "type": "object"
     },
     "DocumentRangeFormattingClientCapabilities": {
@@ -1578,11 +1418,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument",
-        "range",
-        "options"
-      ],
+      "required": ["textDocument", "range", "options"],
       "type": "object"
     },
     "DocumentSelector": {
@@ -1635,12 +1471,7 @@
           "description": "The range that should be selected and revealed when this symbol is being picked, e.g the name of a function.\r\nMust be contained by the the `range`."
         }
       },
-      "required": [
-        "name",
-        "kind",
-        "range",
-        "selectionRange"
-      ],
+      "required": ["name", "kind", "range", "selectionRange"],
       "type": "object"
     },
     "DocumentSymbolClientCapabilities": {
@@ -1699,9 +1530,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument"
-      ],
+      "required": ["textDocument"],
       "type": "object"
     },
     "DocumentUri": {
@@ -1734,9 +1563,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "commands"
-      ],
+      "required": ["commands"],
       "type": "object"
     },
     "ExecuteCommandParams": {
@@ -1745,8 +1572,7 @@
       "properties": {
         "arguments": {
           "description": "Arguments that the command should be invoked with.",
-          "items": {
-          },
+          "items": {},
           "type": "array"
         },
         "command": {
@@ -1758,27 +1584,16 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "command"
-      ],
+      "required": ["command"],
       "type": "object"
     },
     "FailureHandlingKind": {
-      "enum": [
-        "abort",
-        "transactional",
-        "undo",
-        "textOnlyTransactional"
-      ],
+      "enum": ["abort", "transactional", "undo", "textOnlyTransactional"],
       "type": "string"
     },
     "FileChangeType": {
       "description": "The file event type",
-      "enum": [
-        1,
-        2,
-        3
-      ],
+      "enum": [1, 2, 3],
       "type": "number"
     },
     "FileEvent": {
@@ -1794,10 +1609,7 @@
           "description": "The file's uri."
         }
       },
-      "required": [
-        "uri",
-        "type"
-      ],
+      "required": ["uri", "type"],
       "type": "object"
     },
     "FoldingRange": {
@@ -1825,10 +1637,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "startLine",
-        "endLine"
-      ],
+      "required": ["startLine", "endLine"],
       "type": "object"
     },
     "FoldingRangeClientCapabilities": {
@@ -1875,9 +1684,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument"
-      ],
+      "required": ["textDocument"],
       "type": "object"
     },
     "FoldingRangeRegistrationOptions": {
@@ -1902,9 +1709,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "documentSelector"
-      ],
+      "required": ["documentSelector"],
       "type": "object"
     },
     "FormattingOptions": {
@@ -1920,8 +1725,7 @@
             "type": "string"
           },
           {
-            "not": {
-            }
+            "not": {}
           }
         ],
         "description": "Signature for further properties."
@@ -1949,10 +1753,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "tabSize",
-        "insertSpaces"
-      ],
+      "required": ["tabSize", "insertSpaces"],
       "type": "object"
     },
     "Hover": {
@@ -1981,9 +1782,7 @@
           "description": "An optional range"
         }
       },
-      "required": [
-        "contents"
-      ],
+      "required": ["contents"],
       "type": "object"
     },
     "HoverClientCapabilities": {
@@ -2059,9 +1858,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "documentSelector"
-      ],
+      "required": ["documentSelector"],
       "type": "object"
     },
     "InitializeParams": {
@@ -2084,9 +1881,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "name"
-          ],
+          "required": ["name"],
           "type": "object"
         },
         "initializationOptions": {
@@ -2094,17 +1889,11 @@
         },
         "processId": {
           "description": "The process Id of the parent process that started\nthe server.",
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "rootPath": {
           "description": "The rootPath of the workspace. Is null\nif no folder is open.",
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "rootUri": {
           "anyOf": [
@@ -2119,11 +1908,7 @@
         },
         "trace": {
           "description": "The initial trace setting. If omitted trace is disabled ('off').",
-          "enum": [
-            "off",
-            "messages",
-            "verbose"
-          ],
+          "enum": ["off", "messages", "verbose"],
           "type": "string"
         },
         "workDoneToken": {
@@ -2145,12 +1930,7 @@
           "description": "The actual configured workspace folders."
         }
       },
-      "required": [
-        "capabilities",
-        "processId",
-        "rootUri",
-        "workspaceFolders"
-      ],
+      "required": ["capabilities", "processId", "rootUri", "workspaceFolders"],
       "type": "object"
     },
     "InitializeResult": {
@@ -2176,15 +1956,11 @@
               "type": "string"
             }
           },
-          "required": [
-            "name"
-          ],
+          "required": ["name"],
           "type": "object"
         }
       },
-      "required": [
-        "capabilities"
-      ],
+      "required": ["capabilities"],
       "type": "object"
     },
     "InitializedParams": {
@@ -2193,10 +1969,7 @@
     },
     "InsertTextFormat": {
       "description": "Defines whether the insert text in a completion item should be interpreted as\r\nplain text or a snippet.",
-      "enum": [
-        1,
-        2
-      ],
+      "enum": [1, 2],
       "type": "number"
     },
     "Location": {
@@ -2210,10 +1983,7 @@
           "$ref": "#/definitions/DocumentUri"
         }
       },
-      "required": [
-        "uri",
-        "range"
-      ],
+      "required": ["uri", "range"],
       "type": "object"
     },
     "LogMessageParams": {
@@ -2229,10 +1999,7 @@
           "description": "The message type. See {@link MessageType}"
         }
       },
-      "required": [
-        "type",
-        "message"
-      ],
+      "required": ["type", "message"],
       "type": "object"
     },
     "MarkedString": {
@@ -2250,10 +2017,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "language",
-            "value"
-          ],
+          "required": ["language", "value"],
           "type": "object"
         }
       ],
@@ -2272,18 +2036,12 @@
           "type": "string"
         }
       },
-      "required": [
-        "kind",
-        "value"
-      ],
+      "required": ["kind", "value"],
       "type": "object"
     },
     "MarkupKind": {
       "description": "Describes the content type that a client supports in various\r\nresult literals like `Hover`, `ParameterInfo` or `CompletionItem`.\r\n\r\nPlease note that `MarkupKinds` must not start with a `$`. This kinds\r\nare reserved for internal usage.",
-      "enum": [
-        "plaintext",
-        "markdown"
-      ],
+      "enum": ["plaintext", "markdown"],
       "type": "string"
     },
     "MessageActionItem": {
@@ -2294,19 +2052,12 @@
           "type": "string"
         }
       },
-      "required": [
-        "title"
-      ],
+      "required": ["title"],
       "type": "object"
     },
     "MessageType": {
       "description": "The message type",
-      "enum": [
-        1,
-        2,
-        3,
-        4
-      ],
+      "enum": [1, 2, 3, 4],
       "type": "number"
     },
     "ParameterInformation": {
@@ -2346,9 +2097,7 @@
           "description": "The label of this parameter information.\r\n\r\nEither a string or an inclusive start and exclusive end offsets within its containing\r\nsignature label. (see SignatureInformation.label). The offsets are based on a UTF-16\r\nstring representation as `Position` and `Range` does.\r\n\r\n*Note*: a label of type string should be a substring of its containing signature label.\r\nIts intended use case is to highlight the parameter label part in the `SignatureInformation.label`."
         }
       },
-      "required": [
-        "label"
-      ],
+      "required": ["label"],
       "type": "object"
     },
     "Position": {
@@ -2364,17 +2113,11 @@
           "type": "number"
         }
       },
-      "required": [
-        "line",
-        "character"
-      ],
+      "required": ["line", "character"],
       "type": "object"
     },
     "ProgressToken": {
-      "type": [
-        "number",
-        "string"
-      ]
+      "type": ["number", "string"]
     },
     "PublishDiagnosticsClientCapabilities": {
       "additionalProperties": false,
@@ -2396,9 +2139,7 @@
               "type": "array"
             }
           },
-          "required": [
-            "valueSet"
-          ],
+          "required": ["valueSet"],
           "type": "object"
         }
       },
@@ -2424,10 +2165,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "uri",
-        "diagnostics"
-      ],
+      "required": ["uri", "diagnostics"],
       "type": "object"
     },
     "Range": {
@@ -2443,10 +2181,7 @@
           "description": "The range's start position"
         }
       },
-      "required": [
-        "start",
-        "end"
-      ],
+      "required": ["start", "end"],
       "type": "object"
     },
     "ReferenceClientCapabilities": {
@@ -2469,9 +2204,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "includeDeclaration"
-      ],
+      "required": ["includeDeclaration"],
       "type": "object"
     },
     "ReferenceOptions": {
@@ -2508,11 +2241,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "context",
-        "position",
-        "textDocument"
-      ],
+      "required": ["context", "position", "textDocument"],
       "type": "object"
     },
     "Registration": {
@@ -2531,10 +2260,7 @@
           "description": "Options necessary for the registration."
         }
       },
-      "required": [
-        "id",
-        "method"
-      ],
+      "required": ["id", "method"],
       "type": "object"
     },
     "RegistrationParams": {
@@ -2547,9 +2273,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "registrations"
-      ],
+      "required": ["registrations"],
       "type": "object"
     },
     "RenameClientCapabilities": {
@@ -2572,9 +2296,7 @@
       "properties": {
         "kind": {
           "description": "A rename",
-          "enum": [
-            "rename"
-          ],
+          "enum": ["rename"],
           "type": "string"
         },
         "newUri": {
@@ -2590,11 +2312,7 @@
           "description": "Rename options."
         }
       },
-      "required": [
-        "kind",
-        "newUri",
-        "oldUri"
-      ],
+      "required": ["kind", "newUri", "oldUri"],
       "type": "object"
     },
     "RenameFileOptions": {
@@ -2647,20 +2365,12 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "textDocument",
-        "position",
-        "newName"
-      ],
+      "required": ["textDocument", "position", "newName"],
       "type": "object"
     },
     "ResourceOperationKind": {
       "description": "The kind of resource operations supported by the client.",
-      "enum": [
-        "create",
-        "rename",
-        "delete"
-      ],
+      "enum": ["create", "rename", "delete"],
       "type": "string"
     },
     "ResponseErrorLiteral<any>": {
@@ -2678,10 +2388,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "code",
-        "message"
-      ],
+      "required": ["code", "message"],
       "type": "object"
     },
     "SaveOptions": {
@@ -2736,9 +2443,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "documentSelector"
-      ],
+      "required": ["documentSelector"],
       "type": "object"
     },
     "ServerCapabilities<any>": {
@@ -2974,10 +2679,7 @@
               "properties": {
                 "changeNotifications": {
                   "description": "Whether the server wants to receive workspace folder\nchange notifications.\n\nIf a strings is provided the string is treated as a ID\nunder which the notification is registed on the client\nside. The ID can be used to unregister for these events\nusing the `client/unregisterCapability` request.",
-                  "type": [
-                    "string",
-                    "boolean"
-                  ]
+                  "type": ["string", "boolean"]
                 },
                 "supported": {
                   "description": "The Server has support for workspace folders",
@@ -3016,10 +2718,7 @@
           "description": "The message type. See {@link MessageType}"
         }
       },
-      "required": [
-        "type",
-        "message"
-      ],
+      "required": ["type", "message"],
       "type": "object"
     },
     "ShowMessageRequestParams": {
@@ -3041,10 +2740,7 @@
           "description": "The message type. See {@link MessageType}"
         }
       },
-      "required": [
-        "type",
-        "message"
-      ],
+      "required": ["type", "message"],
       "type": "object"
     },
     "SignatureHelp": {
@@ -3053,17 +2749,11 @@
       "properties": {
         "activeParameter": {
           "description": "The active parameter of the active signature. Set to `null`\r\nif the active signature has no parameters.",
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "activeSignature": {
           "description": "The active signature. Set to `null` if no\r\nsignatures exist.",
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "signatures": {
           "description": "One or more signatures.",
@@ -3073,11 +2763,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "signatures",
-        "activeSignature",
-        "activeParameter"
-      ],
+      "required": ["signatures", "activeSignature", "activeParameter"],
       "type": "object"
     },
     "SignatureHelpClientCapabilities": {
@@ -3171,9 +2857,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "label"
-      ],
+      "required": ["label"],
       "type": "object"
     },
     "SymbolInformation": {
@@ -3201,42 +2885,14 @@
           "type": "string"
         }
       },
-      "required": [
-        "name",
-        "kind",
-        "location"
-      ],
+      "required": ["name", "kind", "location"],
       "type": "object"
     },
     "SymbolKind": {
       "description": "A symbol kind.",
       "enum": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24, 25, 26
       ],
       "type": "number"
     },
@@ -3352,9 +3008,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "text"
-      ],
+      "required": ["text"],
       "type": "object"
     },
     "TextDocumentEdit": {
@@ -3373,10 +3027,7 @@
           "description": "The text document to change."
         }
       },
-      "required": [
-        "textDocument",
-        "edits"
-      ],
+      "required": ["textDocument", "edits"],
       "type": "object"
     },
     "TextDocumentIdentifier": {
@@ -3388,9 +3039,7 @@
           "description": "The text document's uri."
         }
       },
-      "required": [
-        "uri"
-      ],
+      "required": ["uri"],
       "type": "object"
     },
     "TextDocumentItem": {
@@ -3414,12 +3063,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "uri",
-        "languageId",
-        "version",
-        "text"
-      ],
+      "required": ["uri", "languageId", "version", "text"],
       "type": "object"
     },
     "TextDocumentPositionParams": {
@@ -3435,19 +3079,12 @@
           "description": "The text document."
         }
       },
-      "required": [
-        "textDocument",
-        "position"
-      ],
+      "required": ["textDocument", "position"],
       "type": "object"
     },
     "TextDocumentSaveReason": {
       "description": "Represents reasons why a text document is saved.",
-      "enum": [
-        1,
-        2,
-        3
-      ],
+      "enum": [1, 2, 3],
       "type": "number"
     },
     "TextDocumentSyncClientCapabilities": {
@@ -3474,11 +3111,7 @@
     },
     "TextDocumentSyncKind": {
       "description": "Defines how the host (editor) should sync\ndocument changes to the language server.",
-      "enum": [
-        0,
-        1,
-        2
-      ],
+      "enum": [0, 1, 2],
       "type": "number"
     },
     "TextDocumentSyncOptions": {
@@ -3520,10 +3153,7 @@
           "description": "The range of the text document to be manipulated. To insert\r\ntext into a document create a range where start === end."
         }
       },
-      "required": [
-        "range",
-        "newText"
-      ],
+      "required": ["range", "newText"],
       "type": "object"
     },
     "TypeDefinitionClientCapabilities": {
@@ -3572,9 +3202,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "documentSelector"
-      ],
+      "required": ["documentSelector"],
       "type": "object"
     },
     "Unregistration": {
@@ -3590,10 +3218,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "id",
-        "method"
-      ],
+      "required": ["id", "method"],
       "type": "object"
     },
     "UnregistrationParams": {
@@ -3606,9 +3231,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "unregisterations"
-      ],
+      "required": ["unregisterations"],
       "type": "object"
     },
     "VersionedTextDocumentIdentifier": {
@@ -3621,16 +3244,10 @@
         },
         "version": {
           "description": "The version number of this document. If a versioned text document identifier\r\nis sent from the server to the client and the file is not open in the editor\r\n(the server has not received an open notification before) the server can send\r\n`null` to indicate that the version is unknown and the content on disk is the\r\ntruth (as speced with document content ownership).",
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         }
       },
-      "required": [
-        "uri",
-        "version"
-      ],
+      "required": ["uri", "version"],
       "type": "object"
     },
     "WillSaveTextDocumentParams": {
@@ -3646,10 +3263,7 @@
           "description": "The document that will be saved."
         }
       },
-      "required": [
-        "textDocument",
-        "reason"
-      ],
+      "required": ["textDocument", "reason"],
       "type": "object"
     },
     "WorkspaceClientCapabilities": {
@@ -3753,10 +3367,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "uri",
-        "name"
-      ],
+      "required": ["uri", "name"],
       "type": "object"
     },
     "WorkspaceFoldersChangeEvent": {
@@ -3778,10 +3389,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "added",
-        "removed"
-      ],
+      "required": ["added", "removed"],
       "type": "object"
     },
     "WorkspaceSymbolClientCapabilities": {
@@ -3836,9 +3444,7 @@
           "description": "An optional token that a server can use to report work done progress."
         }
       },
-      "required": [
-        "query"
-      ],
+      "required": ["query"],
       "type": "object"
     },
     "_AnyFeature": {
@@ -4002,9 +3608,7 @@
           "$ref": "#/definitions/_CancelRequestRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_CancelRequestRequest": {
@@ -4012,19 +3616,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "$/cancelRequest"
-          ],
+          "enum": ["$/cancelRequest"],
           "type": "string"
         },
         "params": {
@@ -4032,12 +3631,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_ClientRegisterCapabilityFeature": {
@@ -4057,10 +3651,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_ClientRegisterCapabilityRequest": {
@@ -4068,19 +3659,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "client/registerCapability"
-          ],
+          "enum": ["client/registerCapability"],
           "type": "string"
         },
         "params": {
@@ -4088,12 +3674,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_ClientRegisterCapabilityResponse": {
@@ -4101,11 +3682,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -4132,11 +3709,7 @@
           "type": "null"
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_ClientUnregisterCapabilityFeature": {
@@ -4156,10 +3729,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_ClientUnregisterCapabilityRequest": {
@@ -4167,19 +3737,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "client/unregisterCapability"
-          ],
+          "enum": ["client/unregisterCapability"],
           "type": "string"
         },
         "params": {
@@ -4187,12 +3752,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_ClientUnregisterCapabilityResponse": {
@@ -4200,11 +3760,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -4231,11 +3787,7 @@
           "type": "null"
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_CodeLensResolveFeature": {
@@ -4255,10 +3807,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_CodeLensResolveRequest": {
@@ -4266,19 +3815,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "codeLens/resolve"
-          ],
+          "enum": ["codeLens/resolve"],
           "type": "string"
         },
         "params": {
@@ -4286,12 +3830,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_CodeLensResolveResponse": {
@@ -4299,11 +3838,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -4329,11 +3864,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_CompletionItemResolveFeature": {
@@ -4353,10 +3884,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_CompletionItemResolveRequest": {
@@ -4364,19 +3892,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "completionItem/resolve"
-          ],
+          "enum": ["completionItem/resolve"],
           "type": "string"
         },
         "params": {
@@ -4384,12 +3907,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_CompletionItemResolveResponse": {
@@ -4397,11 +3915,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -4427,11 +3941,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_DocumentLinkResolveFeature": {
@@ -4451,10 +3961,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_DocumentLinkResolveRequest": {
@@ -4462,19 +3969,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "documentLink/resolve"
-          ],
+          "enum": ["documentLink/resolve"],
           "type": "string"
         },
         "params": {
@@ -4482,12 +3984,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_DocumentLinkResolveResponse": {
@@ -4495,11 +3992,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -4525,11 +4018,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_ErrorResponse": {
@@ -4541,21 +4030,13 @@
         },
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
         }
       },
-      "required": [
-        "error",
-        "id",
-        "jsonrpc"
-      ],
+      "required": ["error", "id", "jsonrpc"],
       "type": "object"
     },
     "_ExitFeature": {
@@ -4565,9 +4046,7 @@
           "$ref": "#/definitions/_ExitRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_ExitRequest": {
@@ -4575,30 +4054,21 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "exit"
-          ],
+          "enum": ["exit"],
           "type": "string"
         },
         "params": {
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method"
-      ],
+      "required": ["id", "jsonrpc", "method"],
       "type": "object"
     },
     "_InitializeFeature": {
@@ -4618,10 +4088,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_InitializeRequest": {
@@ -4629,19 +4096,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "initialize"
-          ],
+          "enum": ["initialize"],
           "type": "string"
         },
         "params": {
@@ -4649,12 +4111,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_InitializeResponse": {
@@ -4662,11 +4119,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -4692,11 +4145,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_InitializedFeature": {
@@ -4706,9 +4155,7 @@
           "$ref": "#/definitions/_InitializedRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_InitializedRequest": {
@@ -4716,19 +4163,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "initialized"
-          ],
+          "enum": ["initialized"],
           "type": "string"
         },
         "params": {
@@ -4736,12 +4178,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_ShutdownFeature": {
@@ -4761,10 +4198,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_ShutdownRequest": {
@@ -4772,30 +4206,21 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "shutdown"
-          ],
+          "enum": ["shutdown"],
           "type": "string"
         },
         "params": {
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method"
-      ],
+      "required": ["id", "jsonrpc", "method"],
       "type": "object"
     },
     "_ShutdownResponse": {
@@ -4803,11 +4228,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -4834,11 +4255,7 @@
           "type": "null"
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TelemetryEventFeature": {
@@ -4848,9 +4265,7 @@
           "$ref": "#/definitions/_TelemetryEventRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_TelemetryEventRequest": {
@@ -4858,30 +4273,21 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "telemetry/event"
-          ],
+          "enum": ["telemetry/event"],
           "type": "string"
         },
         "params": {
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method"
-      ],
+      "required": ["id", "jsonrpc", "method"],
       "type": "object"
     },
     "_TextDocumentCodeActionFeature": {
@@ -4901,10 +4307,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentCodeActionRequest": {
@@ -4912,19 +4315,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/codeAction"
-          ],
+          "enum": ["textDocument/codeAction"],
           "type": "string"
         },
         "params": {
@@ -4932,12 +4330,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentCodeActionResponse": {
@@ -4945,11 +4338,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -4976,11 +4365,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentCodeLensFeature": {
@@ -5000,10 +4385,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentCodeLensRequest": {
@@ -5011,19 +4393,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/codeLens"
-          ],
+          "enum": ["textDocument/codeLens"],
           "type": "string"
         },
         "params": {
@@ -5031,12 +4408,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentCodeLensResponse": {
@@ -5044,11 +4416,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -5068,11 +4436,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentColorPresentationFeature": {
@@ -5092,10 +4456,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentColorPresentationRequest": {
@@ -5103,19 +4464,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/colorPresentation"
-          ],
+          "enum": ["textDocument/colorPresentation"],
           "type": "string"
         },
         "params": {
@@ -5123,12 +4479,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentColorPresentationResponse": {
@@ -5136,11 +4487,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -5170,11 +4517,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentCompletionFeature": {
@@ -5194,10 +4537,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentCompletionRequest": {
@@ -5205,19 +4545,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/completion"
-          ],
+          "enum": ["textDocument/completion"],
           "type": "string"
         },
         "params": {
@@ -5225,12 +4560,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentCompletionResponse": {
@@ -5238,11 +4568,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -5265,11 +4591,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentDeclarationFeature": {
@@ -5289,10 +4611,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentDeclarationRequest": {
@@ -5300,19 +4619,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/declaration"
-          ],
+          "enum": ["textDocument/declaration"],
           "type": "string"
         },
         "params": {
@@ -5320,12 +4634,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDeclarationResponse": {
@@ -5333,11 +4642,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -5357,11 +4662,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentDefinitionFeature": {
@@ -5381,10 +4682,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentDefinitionRequest": {
@@ -5392,19 +4690,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/definition"
-          ],
+          "enum": ["textDocument/definition"],
           "type": "string"
         },
         "params": {
@@ -5412,12 +4705,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDefinitionResponse": {
@@ -5425,11 +4713,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -5449,11 +4733,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentDidChangeFeature": {
@@ -5463,9 +4743,7 @@
           "$ref": "#/definitions/_TextDocumentDidChangeRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_TextDocumentDidChangeRequest": {
@@ -5473,19 +4751,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/didChange"
-          ],
+          "enum": ["textDocument/didChange"],
           "type": "string"
         },
         "params": {
@@ -5493,12 +4766,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDidCloseFeature": {
@@ -5508,9 +4776,7 @@
           "$ref": "#/definitions/_TextDocumentDidCloseRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_TextDocumentDidCloseRequest": {
@@ -5518,19 +4784,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/didClose"
-          ],
+          "enum": ["textDocument/didClose"],
           "type": "string"
         },
         "params": {
@@ -5538,12 +4799,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDidOpenFeature": {
@@ -5553,9 +4809,7 @@
           "$ref": "#/definitions/_TextDocumentDidOpenRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_TextDocumentDidOpenRequest": {
@@ -5563,19 +4817,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/didOpen"
-          ],
+          "enum": ["textDocument/didOpen"],
           "type": "string"
         },
         "params": {
@@ -5583,12 +4832,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDidSaveFeature": {
@@ -5598,9 +4842,7 @@
           "$ref": "#/definitions/_TextDocumentDidSaveRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_TextDocumentDidSaveRequest": {
@@ -5608,19 +4850,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/didSave"
-          ],
+          "enum": ["textDocument/didSave"],
           "type": "string"
         },
         "params": {
@@ -5628,12 +4865,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDocumentColorFeature": {
@@ -5653,10 +4885,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentDocumentColorRequest": {
@@ -5664,19 +4893,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/documentColor"
-          ],
+          "enum": ["textDocument/documentColor"],
           "type": "string"
         },
         "params": {
@@ -5684,12 +4908,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDocumentColorResponse": {
@@ -5697,11 +4916,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -5731,11 +4946,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentDocumentHighlightFeature": {
@@ -5755,10 +4966,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentDocumentHighlightRequest": {
@@ -5766,19 +4974,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/documentHighlight"
-          ],
+          "enum": ["textDocument/documentHighlight"],
           "type": "string"
         },
         "params": {
@@ -5786,12 +4989,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDocumentHighlightResponse": {
@@ -5799,11 +4997,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -5823,11 +5017,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentDocumentLinkFeature": {
@@ -5847,10 +5037,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentDocumentLinkRequest": {
@@ -5858,19 +5045,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/documentLink"
-          ],
+          "enum": ["textDocument/documentLink"],
           "type": "string"
         },
         "params": {
@@ -5878,12 +5060,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDocumentLinkResponse": {
@@ -5891,11 +5068,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -5915,11 +5088,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentDocumentSymbolFeature": {
@@ -5939,10 +5108,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentDocumentSymbolRequest": {
@@ -5950,19 +5116,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/documentSymbol"
-          ],
+          "enum": ["textDocument/documentSymbol"],
           "type": "string"
         },
         "params": {
@@ -5970,12 +5131,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentDocumentSymbolResponse": {
@@ -5983,11 +5139,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6013,11 +5165,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentFoldingRangeFeature": {
@@ -6037,10 +5185,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentFoldingRangeRequest": {
@@ -6048,19 +5193,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/foldingRange"
-          ],
+          "enum": ["textDocument/foldingRange"],
           "type": "string"
         },
         "params": {
@@ -6068,12 +5208,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentFoldingRangeResponse": {
@@ -6081,11 +5216,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6105,11 +5236,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentFormattingFeature": {
@@ -6129,10 +5256,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentFormattingRequest": {
@@ -6140,19 +5264,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/formatting"
-          ],
+          "enum": ["textDocument/formatting"],
           "type": "string"
         },
         "params": {
@@ -6160,12 +5279,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentFormattingResponse": {
@@ -6173,11 +5287,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6197,11 +5307,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentHoverFeature": {
@@ -6221,10 +5327,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentHoverRequest": {
@@ -6232,19 +5335,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/hover"
-          ],
+          "enum": ["textDocument/hover"],
           "type": "string"
         },
         "params": {
@@ -6252,12 +5350,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentHoverResponse": {
@@ -6265,11 +5358,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6286,11 +5375,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentImplementationFeature": {
@@ -6310,10 +5395,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentImplementationRequest": {
@@ -6321,19 +5403,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/implementation"
-          ],
+          "enum": ["textDocument/implementation"],
           "type": "string"
         },
         "params": {
@@ -6341,12 +5418,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentImplementationResponse": {
@@ -6354,11 +5426,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6378,11 +5446,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentOnTypeFormattingFeature": {
@@ -6402,10 +5466,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentOnTypeFormattingRequest": {
@@ -6413,19 +5474,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/onTypeFormatting"
-          ],
+          "enum": ["textDocument/onTypeFormatting"],
           "type": "string"
         },
         "params": {
@@ -6433,12 +5489,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentOnTypeFormattingResponse": {
@@ -6446,11 +5497,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6470,11 +5517,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentPrepareRenameFeature": {
@@ -6494,10 +5537,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentPrepareRenameRequest": {
@@ -6505,19 +5545,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/prepareRename"
-          ],
+          "enum": ["textDocument/prepareRename"],
           "type": "string"
         },
         "params": {
@@ -6525,12 +5560,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentPrepareRenameResponse": {
@@ -6538,11 +5568,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6562,10 +5588,7 @@
                   "$ref": "#/definitions/Range"
                 }
               },
-              "required": [
-                "range",
-                "placeholder"
-              ],
+              "required": ["range", "placeholder"],
               "type": "object"
             },
             {
@@ -6575,11 +5598,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentPublishDiagnosticsFeature": {
@@ -6589,9 +5608,7 @@
           "$ref": "#/definitions/_TextDocumentPublishDiagnosticsRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_TextDocumentPublishDiagnosticsRequest": {
@@ -6599,19 +5616,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/publishDiagnostics"
-          ],
+          "enum": ["textDocument/publishDiagnostics"],
           "type": "string"
         },
         "params": {
@@ -6619,12 +5631,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentRangeFormattingFeature": {
@@ -6644,10 +5651,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentRangeFormattingRequest": {
@@ -6655,19 +5659,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/rangeFormatting"
-          ],
+          "enum": ["textDocument/rangeFormatting"],
           "type": "string"
         },
         "params": {
@@ -6675,12 +5674,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentRangeFormattingResponse": {
@@ -6688,11 +5682,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6712,11 +5702,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentReferencesFeature": {
@@ -6736,10 +5722,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentReferencesRequest": {
@@ -6747,19 +5730,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/references"
-          ],
+          "enum": ["textDocument/references"],
           "type": "string"
         },
         "params": {
@@ -6767,12 +5745,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentReferencesResponse": {
@@ -6780,11 +5753,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6804,11 +5773,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentRenameFeature": {
@@ -6828,10 +5793,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentRenameRequest": {
@@ -6839,19 +5801,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/rename"
-          ],
+          "enum": ["textDocument/rename"],
           "type": "string"
         },
         "params": {
@@ -6859,12 +5816,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentRenameResponse": {
@@ -6872,11 +5824,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6893,11 +5841,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentSignatureHelpFeature": {
@@ -6917,10 +5861,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentSignatureHelpRequest": {
@@ -6928,19 +5869,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/signatureHelp"
-          ],
+          "enum": ["textDocument/signatureHelp"],
           "type": "string"
         },
         "params": {
@@ -6948,12 +5884,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentSignatureHelpResponse": {
@@ -6961,11 +5892,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -6982,11 +5909,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentTypeDefinitionFeature": {
@@ -7006,10 +5929,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_TextDocumentTypeDefinitionRequest": {
@@ -7017,19 +5937,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/typeDefinition"
-          ],
+          "enum": ["textDocument/typeDefinition"],
           "type": "string"
         },
         "params": {
@@ -7037,12 +5952,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentTypeDefinitionResponse": {
@@ -7050,11 +5960,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -7074,11 +5980,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_TextDocumentWillSaveFeature": {
@@ -7088,9 +5990,7 @@
           "$ref": "#/definitions/_TextDocumentWillSaveRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_TextDocumentWillSaveRequest": {
@@ -7098,19 +5998,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/willSave"
-          ],
+          "enum": ["textDocument/willSave"],
           "type": "string"
         },
         "params": {
@@ -7118,12 +6013,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_TextDocumentWillSaveWaitUntilFeature": {
@@ -7133,9 +6023,7 @@
           "$ref": "#/definitions/_TextDocumentWillSaveWaitUntilRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_TextDocumentWillSaveWaitUntilRequest": {
@@ -7143,19 +6031,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "textDocument/willSaveWaitUntil"
-          ],
+          "enum": ["textDocument/willSaveWaitUntil"],
           "type": "string"
         },
         "params": {
@@ -7163,12 +6046,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WindowLogMessageFeature": {
@@ -7178,9 +6056,7 @@
           "$ref": "#/definitions/_WindowLogMessageRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_WindowLogMessageRequest": {
@@ -7188,19 +6064,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "window/logMessage"
-          ],
+          "enum": ["window/logMessage"],
           "type": "string"
         },
         "params": {
@@ -7208,12 +6079,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WindowShowMessageFeature": {
@@ -7223,9 +6089,7 @@
           "$ref": "#/definitions/_WindowShowMessageRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_WindowShowMessageRequest": {
@@ -7233,19 +6097,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "window/showMessage"
-          ],
+          "enum": ["window/showMessage"],
           "type": "string"
         },
         "params": {
@@ -7253,12 +6112,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WindowShowMessageRequestFeature": {
@@ -7278,10 +6132,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_WindowShowMessageRequestRequest": {
@@ -7289,19 +6140,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "window/showMessageRequest"
-          ],
+          "enum": ["window/showMessageRequest"],
           "type": "string"
         },
         "params": {
@@ -7309,12 +6155,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WindowShowMessageRequestResponse": {
@@ -7322,11 +6163,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -7343,11 +6180,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_WorkspaceApplyEditFeature": {
@@ -7367,10 +6200,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_WorkspaceApplyEditRequest": {
@@ -7378,19 +6208,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "workspace/applyEdit"
-          ],
+          "enum": ["workspace/applyEdit"],
           "type": "string"
         },
         "params": {
@@ -7398,12 +6223,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WorkspaceApplyEditResponse": {
@@ -7411,11 +6231,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -7441,11 +6257,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_WorkspaceConfigurationFeature": {
@@ -7465,10 +6277,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_WorkspaceConfigurationRequest": {
@@ -7476,19 +6285,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "workspace/configuration"
-          ],
+          "enum": ["workspace/configuration"],
           "type": "string"
         },
         "params": {
@@ -7496,12 +6300,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WorkspaceConfigurationResponse": {
@@ -7509,11 +6308,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -7537,16 +6332,11 @@
             }
           ],
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method.",
-          "items": {
-          },
+          "items": {},
           "type": "array"
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_WorkspaceDidChangeConfigurationFeature": {
@@ -7556,9 +6346,7 @@
           "$ref": "#/definitions/_WorkspaceDidChangeConfigurationRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_WorkspaceDidChangeConfigurationRequest": {
@@ -7566,19 +6354,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "workspace/didChangeConfiguration"
-          ],
+          "enum": ["workspace/didChangeConfiguration"],
           "type": "string"
         },
         "params": {
@@ -7586,12 +6369,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WorkspaceDidChangeWatchedFilesFeature": {
@@ -7601,9 +6379,7 @@
           "$ref": "#/definitions/_WorkspaceDidChangeWatchedFilesRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_WorkspaceDidChangeWatchedFilesRequest": {
@@ -7611,19 +6387,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "workspace/didChangeWatchedFiles"
-          ],
+          "enum": ["workspace/didChangeWatchedFiles"],
           "type": "string"
         },
         "params": {
@@ -7631,12 +6402,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WorkspaceDidChangeWorkspaceFoldersFeature": {
@@ -7646,9 +6412,7 @@
           "$ref": "#/definitions/_WorkspaceDidChangeWorkspaceFoldersRequest"
         }
       },
-      "required": [
-        "request"
-      ],
+      "required": ["request"],
       "type": "object"
     },
     "_WorkspaceDidChangeWorkspaceFoldersRequest": {
@@ -7656,19 +6420,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "workspace/didChangeWorkspaceFolders"
-          ],
+          "enum": ["workspace/didChangeWorkspaceFolders"],
           "type": "string"
         },
         "params": {
@@ -7676,12 +6435,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WorkspaceExecuteCommandFeature": {
@@ -7701,10 +6455,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_WorkspaceExecuteCommandRequest": {
@@ -7712,19 +6463,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "workspace/executeCommand"
-          ],
+          "enum": ["workspace/executeCommand"],
           "type": "string"
         },
         "params": {
@@ -7732,12 +6478,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WorkspaceExecuteCommandResponse": {
@@ -7745,19 +6486,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "result": {
           "anyOf": [
-            {
-            },
+            {},
             {
               "type": "null"
             }
@@ -7765,11 +6501,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_WorkspaceSymbolFeature": {
@@ -7789,10 +6521,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_WorkspaceSymbolRequest": {
@@ -7800,19 +6529,14 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "workspace/symbol"
-          ],
+          "enum": ["workspace/symbol"],
           "type": "string"
         },
         "params": {
@@ -7820,12 +6544,7 @@
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method",
-        "params"
-      ],
+      "required": ["id", "jsonrpc", "method", "params"],
       "type": "object"
     },
     "_WorkspaceSymbolResponse": {
@@ -7833,11 +6552,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -7857,11 +6572,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     },
     "_WorkspaceWorkspaceFoldersFeature": {
@@ -7881,10 +6592,7 @@
           ]
         }
       },
-      "required": [
-        "request",
-        "response"
-      ],
+      "required": ["request", "response"],
       "type": "object"
     },
     "_WorkspaceWorkspaceFoldersRequest": {
@@ -7892,30 +6600,21 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string"
-          ]
+          "type": ["number", "string"]
         },
         "jsonrpc": {
           "type": "string"
         },
         "method": {
           "description": "The method to be invoked.",
-          "enum": [
-            "workspace/workspaceFolders"
-          ],
+          "enum": ["workspace/workspaceFolders"],
           "type": "string"
         },
         "params": {
           "description": "The method's params."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "method"
-      ],
+      "required": ["id", "jsonrpc", "method"],
       "type": "object"
     },
     "_WorkspaceWorkspaceFoldersResponse": {
@@ -7923,11 +6622,7 @@
       "properties": {
         "id": {
           "description": "The request id.",
-          "type": [
-            "number",
-            "string",
-            "null"
-          ]
+          "type": ["number", "string", "null"]
         },
         "jsonrpc": {
           "type": "string"
@@ -7947,11 +6642,7 @@
           "description": "The result of a request. This member is REQUIRED on success.\r\nThis member MUST NOT exist if there was an error invoking the method."
         }
       },
-      "required": [
-        "id",
-        "jsonrpc",
-        "result"
-      ],
+      "required": ["id", "jsonrpc", "result"],
       "type": "object"
     }
   }

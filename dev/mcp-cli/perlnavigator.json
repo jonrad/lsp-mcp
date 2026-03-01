@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "perlnavigator": {
+      "command": "npx",
+      "args": [
+        "ts-node",
+        "src/index.ts",
+        "--verbose",
+        "--lsp",
+        "c:\\data\\michele\\bin\\perlnavigator.exe --stdio",
+        "--workspace",
+        "C:\\data\\michele\\openqa_xp\\openQA"
+      ]
+    }
+  }
+}

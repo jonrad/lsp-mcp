@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "perlnavigator": {
+      "command": "npx",
+      "args": [
+        "ts-node",
+        "src/index.ts",
+        "--verbose",
+        "--config",
+        "dev/mcp-cli/perlnavigator-with-settings-internal.json"
+      ]
+    }
+  }
+}

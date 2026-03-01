@@ -1,0 +1,255 @@
+From 9ff089b53a9c22ac17bd89aca456c976a1f2f9dc Mon Sep 17 00:00:00 2001
+From: Michele Pagot <michele.pagot@hotmail.it>
+Date: Sun, 1 Mar 2026 23:51:39 +0100
+Subject: [PATCH] update plans with verification sections
+
+---
+ PLAN-01-prettier.md       | 12 ++++++------
+ PLAN-02-linting.md        | 10 +++++-----
+ PLAN-03-testing.md        | 14 +++++++-------
+ PLAN-04-windows-compat.md | 13 +++++++------
+ PLAN-05-lsp-settings.md   | 12 +++++-------
+ PLAN-06-prompt-quality.md | 13 +++++--------
+ PLAN-07-diagnostics.md    | 10 +++++-----
+ PLAN-08-docs.md           |  9 ++++-----
+ 8 files changed, 44 insertions(+), 49 deletions(-)
+
+diff --git a/PLAN-01-prettier.md b/PLAN-01-prettier.md
+index 3dcf812..c9d0cce 100644
+--- a/PLAN-01-prettier.md
++++ b/PLAN-01-prettier.md
+@@ -1,19 +1,19 @@
+ # Plan 01: Prettier Configuration
+ 
+ ## 1. Why
+-
+ We need a solid formatting configuration to avoid wasting time manually formatting code. By adding a `.prettierignore` and refining the format script, we ensure that only relevant source files are processed, skipping large generated JSON schemas and build artifacts. This keeps the git history clean and prevents "noise" changes.
+ 
+ ## 2. How
+-
+ **Files changed:**
+-
+ - `.prettierignore` (New file)
+ - `package.json` (Updated `format` script)
+ 
+ **Steps:**
+-
+ 1. Apply the patch `01-prettier.patch`.
+ 2. Run `yarn install` (to ensure prettier is available).
+-3. Run `yarn format` to verify it only touches relevant files and completes quickly.
+-4. Verify that `dist/` and `src/resources/*.json` are ignored.
++3. Run `yarn format`.
++
++## 3. Verification & Testing
++- **Execution Speed:** Verify that `yarn format` completes in under 3 seconds.
++- **Ignore Rules:** Check `git status` after formatting. Large resource files in `src/resources/*.json` and the `dist/` folder should NOT show any changes.
++- **Targeting:** Verify that a minor formatting change in a `src/*.ts` file is correctly fixed by the command.
+diff --git a/PLAN-02-linting.md b/PLAN-02-linting.md
+index 0072752..d674b75 100644
+--- a/PLAN-02-linting.md
++++ b/PLAN-02-linting.md
+@@ -1,19 +1,19 @@
+ # Plan 02: Linting Configuration
+ 
+ ## 1. Why
+-
+ To maintain code quality and catch bugs early (like unused variables or unawaited promises), we need a modern linting setup. Switching to the ESLint Flat Config (`eslint.config.js`) ensures we follow the latest industry standards and can specifically ignore generic types needed for LSP handling.
+ 
+ ## 2. How
+-
+ **Files changed:**
+-
+ - `eslint.config.js` (New file)
+ - `package.json` (Updated `lint` script)
+ - Various source files (Minor cleanups like `_e` for unused variables)
+ 
+ **Steps:**
+-
+ 1. Apply the patch `02-linting.patch`.
+ 2. Run `yarn lint`.
+-3. Verify that there are no remaining errors (only minor underscore-prefixed warnings are allowed).
++
++## 3. Verification & Testing
++- **Command:** Run `yarn lint`. It should execute without Errors.
++- **Rules:** Confirm that unawaited promises or missing `await` in `App.ts` are now correctly identified (try removing an `await` to see it fail).
++- **Warnings:** A few minor warnings for underscore-prefixed variables (e.g., `_e`) are acceptable and confirm the rule is working.
+diff --git a/PLAN-03-testing.md b/PLAN-03-testing.md
+index c219cd2..250a528 100644
+--- a/PLAN-03-testing.md
++++ b/PLAN-03-testing.md
+@@ -1,20 +1,20 @@
+ # Plan 03: Testing Infrastructure
+ 
+ ## 1. Why
+-
+ A codebase without tests is fragile. We need a solid testing foundation to verify core components (like the `App` and `LspClient`) remain healthy as the project grows. Adding Jest and a basic smoke test allows for automated validation of every PR.
+ 
+ ## 2. How
+-
+ **Files changed:**
+-
+ - `jest.config.js` (New file)
+ - `src/__tests__/smoke.test.ts` (New file)
+ - `package.json` (Added `jest`, `ts-jest`, and `@types/jest` dependencies)
+ 
+ **Steps:**
+-
+ 1. Apply the patch `03-testing.patch`.
+-2. Run `yarn install` to get the new dependencies.
+-3. Run `yarn test` to confirm the smoke test passes.
+-4. Verify that Jest correctly handles TypeScript files.
++2. Run `yarn install`.
++3. Run `yarn test`.
++
++## 3. Verification & Testing
++- **Execution:** Run `yarn test`. You should see `PASS src/__tests__/smoke.test.ts`.
++- **Integration:** Confirm that `ts-jest` correctly compiles the TypeScript test file before execution.
++- **Fail Check:** Temporarily change `expect(app).toBeDefined()` to `toBeUndefined()` and verify that the test fails as expected.
+diff --git a/PLAN-04-windows-compat.md b/PLAN-04-windows-compat.md
+index 77996a7..359a5ba 100644
+--- a/PLAN-04-windows-compat.md
++++ b/PLAN-04-windows-compat.md
+@@ -1,20 +1,21 @@
+ # Plan 04: Windows Compatibility Fixes
+ 
+ ## 1. Why
+-
+ The application was originally designed for Linux/Unix environments (using `sh -c` and `cp`). To make it usable for Windows developers and to support tools like `PerlNavigator.exe`, we must use platform-aware shell spawning and robust URI-to-path resolution that correctly handles drive letters and backslashes.
+ 
+ ## 2. How
+-
+ **Files changed:**
+-
+ - `package.json` (Cross-platform `build` script using `node -e`)
+ - `src/index.ts` (Dynamic shell selection: `cmd.exe` vs `sh`, plus clean `stdin` exit)
+ - `src/lsp-methods.ts` (Robust path/URI conversion using `url` module and `languageId` fix)
+ - `src/lsp.ts` (Handshake fix: correctly formatted `rootUri` via `pathToFileURL`)
+ 
+ **Steps:**
+-
+ 1. Apply the patch `04-windows-compat.patch`.
+-2. Run `yarn build` to verify the new cross-platform script works.
+-3. Test with an LSP like `perlnavigator.exe` to confirm it spawns correctly and maps the workspace.
++2. Run `yarn build`.
++
++## 3. Verification & Testing
++- **Build Script:** Run `yarn build`. Verify that resources are correctly copied to `dist/resources` on a Windows machine.
++- **Process Spawning:** Run the server with an absolute path to a Windows `.exe` (e.g., `perlnavigator.exe`). It should no longer throw `sh ENOENT`.
++- **Path Resolution:** Use a tool call with a `file:///C:/...` URI. Verify in the logs that it is correctly converted to a local Windows path without double drive letters.
++- **Shutdown:** Pipe a single request into the server. Verify that it processes the request and exits automatically without hanging.
+diff --git a/PLAN-05-lsp-settings.md b/PLAN-05-lsp-settings.md
+index 263adba..18a3317 100644
+--- a/PLAN-05-lsp-settings.md
++++ b/PLAN-05-lsp-settings.md
+@@ -1,20 +1,18 @@
+ # Plan 05: LSP Workspace Configuration Support
+ 
+ ## 1. Why
+-
+ LSP servers often require complex configuration (like `perlPath`, `includePaths`, or `lintingSeverities`) that cannot be easily passed via CLI arguments. By supporting the standard `workspace/configuration` request, we allow users to provide full JSON-based settings to the LSP through the MCP server.
+ 
+ ## 2. How
+-
+ **Files changed:**
+-
+ - `src/config.ts` (Added optional `settings` field to the LSP schema)
+ - `src/lsp.ts` (Implemented the `workspace/configuration` request handler)
+-- `src/app.ts` (Modified `buildLsps` to pass the settings from config to the LSP Client)
++- `src/app.ts` (Modified `buildLsps` to pass settings)
+ 
+ **Steps:**
+-
+ 1. Apply the patch `05-lsp-settings.patch`.
+ 2. Create a configuration JSON containing a `settings` block for your LSP.
+-3. Start the server with `--verbose`.
+-4. Trigger an LSP tool and verify in the logs that `Received workspace/configuration request` is handled correctly.
++
++## 3. Verification & Testing
++- **Log Check:** Run the server with `--verbose`. Trigger an LSP tool. Verify that the log shows `Received workspace/configuration request`.
++- **Functionality:** Set a specific setting that has a visible effect (e.g., disable a linter in the settings). Verify that the LSP respects this setting during execution.
+diff --git a/PLAN-06-prompt-quality.md b/PLAN-06-prompt-quality.md
+index 96cbcf2..5946435 100644
+--- a/PLAN-06-prompt-quality.md
++++ b/PLAN-06-prompt-quality.md
+@@ -1,19 +1,16 @@
+ # Plan 06: AI Prompt Quality & Result Formatting
+ 
+ ## 1. Why
+-
+-Providing the AI with raw JSON blobs containing escaped newlines (`
+-`) and HTML entities (`&#039;`) is inefficient and reduces the AI's "intelligence." By cleaning up documentation and using a retry mechanism for background analysis lag, we provide the LLM with a high-quality "Senior Engineer" level prompt.
++Providing the AI with raw JSON blobs containing escaped newlines (`\n`) and HTML entities (`&#039;`) is inefficient and reduces the AI's "intelligence." By cleaning up documentation and using a retry mechanism for background analysis lag, we provide the LLM with a high-quality "Senior Engineer" level prompt.
+ 
+ ## 2. How
+-
+ **Files changed:**
+-
+ - `src/app.ts` (Implemented recursive `formatResult` and `cleanText` helper; added global retry logic)
+ 
+ **Steps:**
+-
+ 1. Apply the patch `06-prompt-quality.patch`.
+ 2. Call a tool like `textDocument_hover` via an MCP client.
+-3. Verify that the output is clean Markdown with real line breaks and decoded symbols.
+-4. Observe the retry logic in action if the LSP returns an initial `null`.
++
++## 3. Verification & Testing
++- **Output Inspection:** Call `textDocument_hover` for a module like `Carp`. Verify that the output is clean Markdown with REAL line breaks and `'` instead of `&#039;`.
++- **Retry Logic:** Observe the terminal logs. If the LSP returns `null` initially, verify that the server logs a "retrying" message and eventually returns the correct result.
+diff --git a/PLAN-07-diagnostics.md b/PLAN-07-diagnostics.md
+index 85256ab..a0c9061 100644
+--- a/PLAN-07-diagnostics.md
++++ b/PLAN-07-diagnostics.md
+@@ -1,19 +1,19 @@
+ # Plan 07: New MCP Diagnostics Feature
+ 
+ ## 1. Why
+-
+ LLMs benefit from knowing about compiler and linter errors without having to guess. Standard LSP `publishDiagnostics` are notifications (one-way), which don't fit the MCP request model. By caching these notifications, we can expose a dedicated `get_diagnostics` tool that the AI can call to see current issues in a file.
+ 
+ ## 2. How
+-
+ **Files changed:**
+-
+ - `src/lsp.ts` (Implemented `diagnosticsCache` and notification listener)
+ - `src/app.ts` (Registered the new `get_diagnostics` tool)
+ 
+ **Steps:**
+-
+ 1. Apply the patch `07-diagnostics.patch`.
+ 2. Introduce a syntax error in a source file.
+ 3. Call the `get_diagnostics` tool for that file URI.
+-4. Verify that the tool returns the errors found by the LSP.
++
++## 3. Verification & Testing
++- **New Tool:** Verify that `get_diagnostics` appears in the list of available MCP tools.
++- **Accuracy:** Introduce an error (e.g., misspelled module name) and verify that the tool returns the specific error found by the LSP.
++- **Empty State:** Verify that calling the tool on a valid file returns a friendly "No issues found." message.
+diff --git a/PLAN-08-docs.md b/PLAN-08-docs.md
+index 32b02a9..1c777ac 100644
+--- a/PLAN-08-docs.md
++++ b/PLAN-08-docs.md
+@@ -1,16 +1,15 @@
+ # Plan 08: Documentation
+ 
+ ## 1. Why
+-
+ To ensure the AI agent remains grounded in the project's architecture and conventions across different sessions, we need foundational documentation. The `GEMINI.md` file serves as a persistent context for the AI, describing how to build, run, and interact with the server.
+ 
+ ## 2. How
+-
+ **Files changed:**
+-
+ - `GEMINI.md` (New file)
+ 
+ **Steps:**
+-
+ 1. Apply the patch `08-docs.patch`.
+-2. Verify the documentation correctly reflects the current project state.
++
++## 3. Verification & Testing
++- **Content:** Read the `GEMINI.md` file and confirm it accurately describes the current project structure, build commands, and logical components.
++- **AI Recognition:** Verify that the AI agent acknowledges the instructions in `GEMINI.md` in future sessions.
+-- 
+2.53.0.windows.1
+
